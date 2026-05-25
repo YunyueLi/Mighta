@@ -29,6 +29,11 @@ export default function Spawn() {
   const [view, setView] = useState<View>("timeline")
   const [error, setError] = useState<string | null>(null)
 
+  // Auto-sync phase when versions are externally hydrated (e.g. screenshot tool, future undo)
+  useEffect(() => {
+    if (versions.length > 0 && phase === "seed") setPhase("results")
+  }, [versions.length, phase])
+
   const provider = creds ? getProvider(creds.providerId) : null
   const canGenerate = seed.age > 0 && seed.nodes.length > 0 && !!creds
 

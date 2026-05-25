@@ -119,3 +119,10 @@ export const useSpawn = create<SpawnState>()((set) => ({
   setGenerating: (isGenerating) => set({ isGenerating }),
   reset: () => set({ seed: emptySeed, versions: [], isGenerating: false }),
 }))
+
+// Dev-only hook for screenshot tooling — exposes the spawn store on window
+// so headless-Chrome scripts can hydrate mock results without an API call.
+if (import.meta.env.DEV && typeof window !== "undefined") {
+  // @ts-expect-error dev helper
+  window.__useSpawn = useSpawn
+}
