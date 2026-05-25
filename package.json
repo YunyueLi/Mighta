@@ -34,7 +34,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "screenshot": "node scripts/screenshot.mjs"
+    "screenshot": "node scripts/screenshot.mjs",
+    "deploy": "npm run build && wrangler pages deploy dist --project-name=mighta --commit-dirty=true --branch=main"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.98.0",
@@ -65,6 +66,7 @@
     "puppeteer-core": "^25.0.4",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.59.2",
-    "vite": "^8.0.12"
+    "vite": "^8.0.12",
+    "wrangler": "^4.94.0"
   }
 }

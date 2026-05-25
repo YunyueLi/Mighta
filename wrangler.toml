@@ -1,0 +1,5 @@
+# Cloudflare Pages config
+# Used by `wrangler pages deploy` and by the Cloudflare Pages GitHub integration.
+name = "mighta"
+pages_build_output_dir = "dist"
+compatibility_date = "2025-01-01"
