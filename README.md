@@ -140,10 +140,10 @@ If you build a `mighta` demo with an interesting preset (a historical figure, a 
 
 ### Inspired by
 
-- **[MiroFish](https://github.com/666ghj/MiroFish)** — group-agent prediction engine; the genre origin
 - **[The Public Domain Review](https://publicdomainreview.org)** — paper / archive aesthetic
 - **Anthropic.com** — warm restrained editorial surface
 - **NYT Magazine, A24 films, Klim Type** — typography reference
+- **[Robert Frost — _The Road Not Taken_](https://www.poetryfoundation.org/poems/44272/the-road-not-taken)** — the source
 
 ### License
 

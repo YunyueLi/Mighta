@@ -1,7 +1,7 @@
 /**
  * A row of hand-drawn cartoon people that drifts slowly across the canvas.
  * Each figure has its own silhouette — solid hair, posture, accessories, props.
- * Inspired by MiroFish landing. Single-color (currentColor) so it adapts to theme.
+ * Single-color (currentColor) so it adapts to theme.
  */
 
 import type { SVGProps } from "react"
