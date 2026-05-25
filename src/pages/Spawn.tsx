@@ -7,7 +7,7 @@ import ForkCard from "../components/ForkCard"
 import Timeline from "../components/Timeline"
 import Importer from "../components/Importer"
 import { Plus, X, Spinner, ArrowLeft, ArrowRight } from "../components/Icons"
-import { useSpawn, useSettings } from "../lib/store"
+import { useSpawn, useActiveCreds } from "../lib/store"
 import { callLLM } from "../lib/llm"
 import { getProvider } from "../lib/llm/providers"
 import { buildSpawnSystem, buildSpawnUser, parseForks, type RawFork } from "../lib/spawnPrompt"
@@ -24,7 +24,7 @@ export default function Spawn() {
   const { t, i18n } = useTranslation()
   const { seed, versions, isGenerating, setSeed, addNode, removeNode, setVersions, setGenerating, reset } =
     useSpawn()
-  const creds = useSettings((s) => s.getActiveCreds())
+  const creds = useActiveCreds()
   const [phase, setPhase] = useState<Phase>(versions.length > 0 ? "results" : "seed")
   const [view, setView] = useState<View>("timeline")
   const [error, setError] = useState<string | null>(null)
@@ -60,6 +60,7 @@ export default function Spawn() {
         user: buildSpawnUser(seed),
         maxTokens: 4096,
         temperature: 0.85,
+        mockInput: { kind: "spawn", seed, locale: i18n.language },
       })
       const raw = parseForks(text)
       const forks: RawFork[] = raw.map((f, i) => ({ ...f, id: `${Date.now()}-${i}` }))

@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { motion, AnimatePresence } from "framer-motion"
 import { Spinner, X, Check, ArrowLeft } from "./Icons"
 import { callLLM } from "../lib/llm"
-import { useSettings, useSpawn } from "../lib/store"
+import { useSpawn, useActiveCreds } from "../lib/store"
 import { buildExtractSystem, buildExtractUser, parseExtracted, type ExtractedSeed } from "../lib/extractPrompt"
 
 const MAX_BYTES = 200_000
@@ -17,7 +17,7 @@ type Stage = "input" | "parsing" | "preview"
 export default function Importer() {
   const { t, i18n } = useTranslation()
   const { setSeed } = useSpawn()
-  const creds = useSettings((s) => s.getActiveCreds())
+  const creds = useActiveCreds()
   const [open, setOpen] = useState(false)
   const [stage, setStage] = useState<Stage>("input")
   const [text, setText] = useState("")
@@ -80,6 +80,7 @@ export default function Importer() {
         user: buildExtractUser(text),
         maxTokens: 1500,
         temperature: 0.2,
+        mockInput: { kind: "extract", locale: i18n.language },
       })
       const seed = parseExtracted(out)
       setExtracted(seed)

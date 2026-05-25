@@ -1,8 +1,9 @@
+import { useMemo } from "react"
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
 import { PROVIDERS } from "./llm/providers"
 
-interface ProviderCreds {
+export interface ProviderCreds {
   providerId: string
   apiKey: string
   model: string
@@ -20,14 +21,50 @@ interface SettingsState {
   clearProvider: (id: string) => void
   setLanguage: (lang: string) => void
   setTheme: (theme: ThemeMode) => void
-  getActiveCreds: () => ProviderCreds | null
+}
+
+/**
+ * React hook: returns memoized active credentials.
+ * Wraps `deriveActiveCreds` with useMemo so the returned object is stable
+ * (avoids Zustand's "getSnapshot returns new object" infinite loop warning).
+ */
+export function useActiveCreds(): ProviderCreds | null {
+  const activeProvider = useSettings((s) => s.activeProvider)
+  const creds = useSettings((s) => s.creds)
+  return useMemo(() => deriveActiveCreds(activeProvider, creds), [activeProvider, creds])
+}
+
+/**
+ * Derive the active credentials from settings state.
+ * Pure function — call from a `useMemo` to avoid the Zustand "new object each render" pitfall.
+ */
+export function deriveActiveCreds(
+  activeProvider: string,
+  creds: Record<string, { apiKey: string; model: string }>
+): ProviderCreds | null {
+  const provider = PROVIDERS.find((p) => p.id === activeProvider)
+  if (!provider) return null
+  if (provider.type === "mock") {
+    return {
+      providerId: activeProvider,
+      apiKey: "mock",
+      model: provider.defaultModel,
+    }
+  }
+  const c = creds[activeProvider]
+  if (!c?.apiKey) return null
+  return {
+    providerId: activeProvider,
+    apiKey: c.apiKey,
+    model: c.model || provider.defaultModel,
+  }
 }
 
 export const useSettings = create<SettingsState>()(
   persist(
-    (set, get) => ({
-      activeProvider: "anthropic",
-      creds: {},
+    (set) => ({
+      activeProvider: "mock",
+      creds: { mock: { apiKey: "mock", model: "mock-fixture" } },
       language: "auto",
       theme: "auto",
       setActiveProvider: (id) => set({ activeProvider: id }),
@@ -41,17 +78,6 @@ export const useSettings = create<SettingsState>()(
         }),
       setLanguage: (language) => set({ language }),
       setTheme: (theme) => set({ theme }),
-      getActiveCreds: () => {
-        const s = get()
-        const c = s.creds[s.activeProvider]
-        if (!c?.apiKey) return null
-        const provider = PROVIDERS.find((p) => p.id === s.activeProvider)
-        return {
-          providerId: s.activeProvider,
-          apiKey: c.apiKey,
-          model: c.model || provider?.defaultModel || "",
-        }
-      },
     }),
     { name: "mighta-settings-v2" }
   )

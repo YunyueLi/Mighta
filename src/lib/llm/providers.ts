@@ -1,4 +1,4 @@
-export type ProviderType = "openai-compat" | "anthropic"
+export type ProviderType = "openai-compat" | "anthropic" | "mock"
 export type Speed = "fast" | "balanced" | "deep"
 
 export interface ModelDef {
@@ -22,6 +22,18 @@ export interface Provider {
 }
 
 export const PROVIDERS: Provider[] = [
+  {
+    id: "mock",
+    name: "Demo (no key)",
+    type: "mock",
+    defaultModel: "mock-fixture",
+    models: [
+      { id: "mock-fixture", label: "Fixture data — no API call", speed: "fast" },
+    ],
+    keyDocsUrl: "",
+    keyHint: "no key needed — uses local fixture data",
+    region: "global",
+  },
   {
     id: "anthropic",
     name: "Anthropic Claude",
