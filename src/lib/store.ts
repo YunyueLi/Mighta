@@ -115,11 +115,17 @@ interface SpawnState {
   }
   versions: ForkVersion[]
   isGenerating: boolean
+  // ── re-fork chain: path of forks the user has descended through
+  chain: ForkVersion[]
   setSeed: (seed: Partial<SpawnState["seed"]>) => void
   addNode: (node: LifeNode) => void
   removeNode: (id: string) => void
   setVersions: (versions: ForkVersion[]) => void
   setGenerating: (generating: boolean) => void
+  // Push a fork onto the chain (user descended into it)
+  pushChain: (fork: ForkVersion) => void
+  // Pop chain back to depth (0 = root)
+  popChainTo: (depth: number) => void
   reset: () => void
 }
 
@@ -133,6 +139,7 @@ const emptySeed = {
 export const useSpawn = create<SpawnState>()((set) => ({
   seed: emptySeed,
   versions: [],
+  chain: [],
   isGenerating: false,
   setSeed: (seed) => set((state) => ({ seed: { ...state.seed, ...seed } })),
   addNode: (node) =>
@@ -143,7 +150,9 @@ export const useSpawn = create<SpawnState>()((set) => ({
     })),
   setVersions: (versions) => set({ versions }),
   setGenerating: (isGenerating) => set({ isGenerating }),
-  reset: () => set({ seed: emptySeed, versions: [], isGenerating: false }),
+  pushChain: (fork) => set((state) => ({ chain: [...state.chain, fork] })),
+  popChainTo: (depth) => set((state) => ({ chain: state.chain.slice(0, depth) })),
+  reset: () => set({ seed: emptySeed, versions: [], chain: [], isGenerating: false }),
 }))
 
 // Dev-only hook for screenshot tooling — exposes the spawn store on window

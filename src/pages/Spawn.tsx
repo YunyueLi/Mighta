@@ -6,8 +6,9 @@ import Nav from "../components/Nav"
 import ForkCard from "../components/ForkCard"
 import Timeline from "../components/Timeline"
 import Importer from "../components/Importer"
-import { Plus, X, Spinner, ArrowLeft, ArrowRight } from "../components/Icons"
-import { useSpawn, useActiveCreds } from "../lib/store"
+import Akinator, { type AkinatorSeed } from "../components/Akinator"
+import { Plus, X, Spinner, ArrowLeft, ArrowRight, Sparkles } from "../components/Icons"
+import { useSpawn, useActiveCreds, type ForkVersion } from "../lib/store"
 import { callLLM } from "../lib/llm"
 import { getProvider } from "../lib/llm/providers"
 import { buildSpawnSystem, buildSpawnUser, parseForks, type RawFork } from "../lib/spawnPrompt"
@@ -15,6 +16,7 @@ import { getPresets } from "../lib/presets"
 
 type Phase = "seed" | "generating" | "results"
 type View = "timeline" | "cards"
+type SeedMode = "form" | "akinator"
 
 function newNodeId() {
   return Math.random().toString(36).slice(2, 9)
@@ -22,11 +24,24 @@ function newNodeId() {
 
 export default function Spawn() {
   const { t, i18n } = useTranslation()
-  const { seed, versions, isGenerating, setSeed, addNode, removeNode, setVersions, setGenerating, reset } =
-    useSpawn()
+  const {
+    seed,
+    versions,
+    chain,
+    isGenerating,
+    setSeed,
+    addNode,
+    removeNode,
+    setVersions,
+    setGenerating,
+    pushChain,
+    popChainTo,
+    reset,
+  } = useSpawn()
   const creds = useActiveCreds()
   const [phase, setPhase] = useState<Phase>(versions.length > 0 ? "results" : "seed")
   const [view, setView] = useState<View>("timeline")
+  const [seedMode, setSeedMode] = useState<SeedMode>("form")
   const [error, setError] = useState<string | null>(null)
 
   // Auto-sync phase when versions are externally hydrated (e.g. screenshot tool, future undo)
@@ -46,21 +61,34 @@ export default function Spawn() {
     [presets]
   )
 
-  async function generate() {
+  async function generate(reForkFrom?: ForkVersion) {
     if (!creds) return
     setError(null)
     setGenerating(true)
     setPhase("generating")
+
+    // If this is a re-fork, push the source onto the chain stack
+    const nextChain = reForkFrom ? [...chain, reForkFrom] : chain
+    if (reForkFrom) pushChain(reForkFrom)
+
     try {
       const text = await callLLM({
         provider: creds.providerId,
         model: creds.model,
         apiKey: creds.apiKey,
         system: buildSpawnSystem(i18n.language),
-        user: buildSpawnUser(seed),
+        user: buildSpawnUser({
+          ...seed,
+          chain: nextChain.map((f) => ({
+            divergence: f.divergence,
+            alternative: f.alternative,
+            outcome: f.outcome,
+            vibe: f.vibe,
+          })),
+        }),
         maxTokens: 4096,
         temperature: 0.85,
-        mockInput: { kind: "spawn", seed, locale: i18n.language },
+        mockInput: { kind: "spawn", seed, locale: i18n.language, chain: nextChain },
       })
       const raw = parseForks(text)
       const forks: RawFork[] = raw.map((f, i) => ({ ...f, id: `${Date.now()}-${i}` }))
@@ -132,10 +160,32 @@ export default function Spawn() {
               transition={{ duration: 0.5 }}
               className="space-y-10"
             >
-              <div className="flex justify-end">
-                <Importer />
-              </div>
-              <SeedForm seed={seed} setSeed={setSeed} addNode={addNode} removeNode={removeNode} />
+              {seedMode === "akinator" ? (
+                <Akinator
+                  onBack={() => setSeedMode("form")}
+                  onComplete={(s: AkinatorSeed) => {
+                    setSeed({ name: s.name, age: s.age, bio: s.bio, nodes: [] })
+                    // add nodes individually (assign ids)
+                    s.nodes.forEach((n) =>
+                      addNode({ id: newNodeId(), age: n.age, moment: n.moment, event: n.event })
+                    )
+                    // auto-generate after a beat
+                    setTimeout(() => generate(), 200)
+                  }}
+                />
+              ) : (
+                <>
+                  <div className="flex items-center justify-between gap-3">
+                    <button
+                      onClick={() => setSeedMode("akinator")}
+                      className="group text-[13px] text-accent hover:text-fg transition-colors duration-300 inline-flex items-center gap-2"
+                    >
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span className="serif-italic">{t("akinator.trigger")}</span>
+                    </button>
+                    <Importer />
+                  </div>
+                  <SeedForm seed={seed} setSeed={setSeed} addNode={addNode} removeNode={removeNode} />
 
               {/* Presets */}
               <div className="space-y-5">
@@ -201,7 +251,7 @@ export default function Spawn() {
               {/* CTA */}
               <div className="pt-2 flex flex-col items-start gap-3">
                 <button
-                  onClick={generate}
+                  onClick={() => generate()}
                   disabled={!canGenerate || isGenerating}
                   className="inline-flex items-center gap-2 px-7 py-3 bg-fg text-bg rounded-full text-[14px] font-medium hover:bg-accent disabled:opacity-25 disabled:cursor-not-allowed transition-colors duration-300"
                 >
@@ -212,6 +262,8 @@ export default function Spawn() {
                   <p className="folio">{t("spawn.generate_meta", { model: creds.model })}</p>
                 )}
               </div>
+                </>
+              )}
             </motion.section>
           )}
 
@@ -224,6 +276,43 @@ export default function Spawn() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6 }}
             >
+              {/* Re-fork chain breadcrumb */}
+              {chain.length > 0 && (
+                <div className="mb-6 flex flex-wrap items-center gap-2 text-[12px] folio">
+                  <button
+                    onClick={() => {
+                      popChainTo(0)
+                      reset()
+                      setPhase("seed")
+                    }}
+                    className="hover:text-fg transition-colors"
+                  >
+                    {t("spawn.chain_root")}
+                  </button>
+                  {chain.map((f, i) => {
+                    const idx = i
+                    return (
+                      <span key={i} className="inline-flex items-center gap-2">
+                        <span className="text-fg-faint">→</span>
+                        <button
+                          onClick={() => {
+                            popChainTo(idx)
+                          }}
+                          className="inline-flex items-center gap-1.5 hover:text-fg transition-colors"
+                        >
+                          <span className="script text-accent text-[14px]">
+                            {["I", "II", "III", "IV", "V", "VI"][i] ?? `${i + 1}`}.
+                          </span>
+                          <span>{t(`vibe.${f.vibe}`)}</span>
+                        </button>
+                      </span>
+                    )
+                  })}
+                  <span className="text-fg-faint mx-1">↳</span>
+                  <span className="text-fg">{t("spawn.chain_here", { depth: chain.length + 1 })}</span>
+                </div>
+              )}
+
               <div className="flex items-center justify-between flex-wrap gap-3 mb-12 -mt-4">
                 <div className="flex items-center gap-3 small-caps text-[10.5px] text-fg-dim">
                   <hr className="rule w-8" />
@@ -299,6 +388,7 @@ export default function Spawn() {
                       <ForkCard
                         key={v.id}
                         index={i}
+                        onReFork={() => generate(v)}
                         fork={{
                           divergence: {
                             age: v.divergence.age,

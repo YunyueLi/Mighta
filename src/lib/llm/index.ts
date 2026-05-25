@@ -16,6 +16,8 @@ export interface CallOpts {
     kind: "spawn" | "extract"
     seed?: { name: string; age: number; bio: string; nodes: Array<{ age: number; moment?: string; event: string }> }
     locale?: string
+    // re-fork chain — mock returns deeper, weirder forks at depth > 0
+    chain?: Array<{ vibe: string; alternative: string; outcome: string; divergence: { age: number; moment?: string; event: string } }>
   }
 }
 
@@ -49,7 +51,8 @@ async function callMock(opts: CallOpts): Promise<string> {
     bio: "",
     nodes: [],
   }
-  return JSON.stringify(buildSpawnFixture(seed, locale))
+  const chain = opts.mockInput?.chain ?? []
+  return JSON.stringify(buildSpawnFixture(seed, locale, chain))
 }
 
 async function callAnthropic(_provider: Provider, opts: CallOpts): Promise<string> {

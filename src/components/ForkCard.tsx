@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { motion, AnimatePresence } from "framer-motion"
-import { ChevronRight } from "./Icons"
+import { ChevronRight, GitFork } from "./Icons"
 import type { RawFork } from "../lib/spawnPrompt"
 
 const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"]
@@ -14,7 +14,15 @@ const vibeAccent: Record<RawFork["vibe"], string> = {
   burn: "text-accent",
 }
 
-export default function ForkCard({ fork, index }: { fork: RawFork; index: number }) {
+export default function ForkCard({
+  fork,
+  index,
+  onReFork,
+}: {
+  fork: RawFork
+  index: number
+  onReFork?: () => void
+}) {
   const [open, setOpen] = useState(false)
   const { t } = useTranslation()
   const vibeColor = vibeAccent[fork.vibe] ?? "text-fg-dim"
@@ -65,17 +73,29 @@ export default function ForkCard({ fork, index }: { fork: RawFork; index: number
       <p className="text-fg-soft text-[14.5px] leading-[1.75] mb-7 text-balance">{fork.outcome}</p>
 
       <hr className="rule mb-4" />
-      <button
-        onClick={() => setOpen(!open)}
-        className="folio inline-flex items-center gap-2 hover:text-fg transition-colors duration-300"
-      >
-        <ChevronRight
-          className={`w-3 h-3 transition-transform duration-500 ${open ? "rotate-90" : ""}`}
-        />
-        {open
-          ? t("spawn.card_trajectory_close")
-          : t("spawn.card_trajectory_open", { count: fork.trajectory.length })}
-      </button>
+      <div className="flex items-center justify-between gap-3">
+        <button
+          onClick={() => setOpen(!open)}
+          className="folio inline-flex items-center gap-2 hover:text-fg transition-colors duration-300"
+        >
+          <ChevronRight
+            className={`w-3 h-3 transition-transform duration-500 ${open ? "rotate-90" : ""}`}
+          />
+          {open
+            ? t("spawn.card_trajectory_close")
+            : t("spawn.card_trajectory_open", { count: fork.trajectory.length })}
+        </button>
+        {onReFork && (
+          <button
+            onClick={onReFork}
+            className="folio inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-line hover:border-accent hover:text-accent hover:bg-accent/[0.04] transition-all duration-300"
+            title={t("spawn.refork_hint")}
+          >
+            <GitFork className="w-3 h-3" />
+            {t("spawn.refork")}
+          </button>
+        )}
+      </div>
 
       <AnimatePresence>
         {open && (

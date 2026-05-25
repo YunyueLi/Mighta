@@ -66,11 +66,19 @@ export function buildSpawnSystem(locale: string): string {
   )
 }
 
+export interface ChainFork {
+  divergence: { age: number; moment?: string; event: string }
+  alternative: string
+  outcome: string
+  vibe: string
+}
+
 export function buildSpawnUser(input: {
   name: string
   age: number
   bio: string
   nodes: LifeNode[]
+  chain?: ChainFork[]
 }) {
   const parts: string[] = []
   if (input.name) parts.push(`Name: ${input.name}`)
@@ -82,8 +90,28 @@ export function buildSpawnUser(input: {
     const time = n.moment ? `${n.moment} (~age ${n.age})` : `Age ${n.age}`
     parts.push(`${i + 1}. ${time} — ${n.event}${n.context ? ` (${n.context})` : ""}`)
   })
-  parts.push("")
-  parts.push("Generate 6 alternative timelines as JSON.")
+
+  // Re-fork: if we're descending from a chain of prior forks, include them
+  // so the model knows "this is not the original person, this is the version
+  // who took fork A, then fork B, and is now asking what if from THIS point."
+  if (input.chain && input.chain.length > 0) {
+    parts.push("")
+    parts.push(
+      "IMPORTANT — this person is not the original. They are a counterfactual descendant. The chain of divergences:"
+    )
+    input.chain.forEach((f, i) => {
+      parts.push(
+        `  Layer ${i + 1} (${f.vibe}): at ~${f.divergence.age}${f.divergence.moment ? ` (${f.divergence.moment})` : ""} — instead of "${f.divergence.event}", they chose "${f.alternative}". Outcome: ${f.outcome}`
+      )
+    })
+    parts.push("")
+    parts.push(
+      "Now generate 6 NEW alternative timelines branching from THAT version's life — not the original. The divergence points should be moments AFTER the most recent layer's outcome. Keep them specific, literary, restrained."
+    )
+  } else {
+    parts.push("")
+    parts.push("Generate 6 alternative timelines as JSON.")
+  }
   return parts.join("\n")
 }
 

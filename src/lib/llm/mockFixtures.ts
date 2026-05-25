@@ -393,8 +393,18 @@ function isSteveJobs(name: string): boolean {
   return n === "steve jobs" || n === "史蒂夫·乔布斯" || n === "賈伯斯" || n === "史蒂夫·賈伯斯" || n === "スティーブ・ジョブズ" || n === "스티브 잡스"
 }
 
-export function buildSpawnFixture(input: SpawnInput, locale: string): { forks: RawFork[] } {
+export function buildSpawnFixture(
+  input: SpawnInput,
+  locale: string,
+  chain: Array<{ vibe: string; alternative: string; outcome: string; divergence: { age: number; moment?: string; event: string } }> = []
+): { forks: RawFork[] } {
   const isCJK = locale.startsWith("zh") || locale.startsWith("ja") || locale.startsWith("ko")
+
+  // Re-fork: at depth > 0, return weirder, deeper-into-counterfactual forks.
+  // We rotate the templates so each layer feels distinct, and reference the chain.
+  if (chain.length > 0) {
+    return reForkFixture(input, locale, chain)
+  }
 
   // Hero fixture: Steve Jobs preset → hand-written
   if (isSteveJobs(input.name)) {
@@ -404,6 +414,66 @@ export function buildSpawnFixture(input: SpawnInput, locale: string): { forks: R
 
   // Fallback: generic improved templates referencing user nodes
   return genericFixture(input, locale)
+}
+
+/**
+ * Re-fork fixture — when the user descends into a fork and asks "what now?"
+ * The model should know we're branching from THAT version's outcome, not the original.
+ *
+ * For mock, we rotate the template index so it doesn't repeat literally, and we
+ * use the chain's last layer as the divergence anchor.
+ */
+function reForkFixture(
+  input: SpawnInput,
+  locale: string,
+  chain: Array<{ vibe: string; alternative: string; outcome: string; divergence: { age: number; moment?: string; event: string } }>
+): { forks: RawFork[] } {
+  const isCJK = locale.startsWith("zh") || locale.startsWith("ja") || locale.startsWith("ko")
+  const depth = chain.length
+  const last = chain[chain.length - 1]
+  const subject = input.name || (isCJK ? "你" : "you")
+  const subjectAge = input.age || 30
+
+  // Start ages for the deeper forks are after the last divergence
+  const baseAge = last.divergence.age + 3
+  const span = Math.max(2, subjectAge - baseAge)
+
+  const vibes: RawFork["vibe"][] = ["shine", "ash", "burn", "quiet", "drift", "shine"]
+  // Rotate template start so each layer's forks feel different
+  const tplStart = depth * 2
+  const templates = isCJK ? cnGenericTemplates : enGenericTemplates
+
+  const forks: RawFork[] = vibes.map((vibe, i) => {
+    const tpl = templates[(tplStart + i) % templates.length]
+    const startAge = baseAge + i * 2
+    const t1 = startAge + Math.round(span * 0.25)
+    const t2 = startAge + Math.round(span * 0.5)
+    const t3 = startAge + Math.round(span * 0.85)
+
+    // Use the chain context as the "instead of" — the user already chose that branch
+    const deeperEvent = isCJK
+      ? `沿着上一层(${last.divergence.moment ?? `~${last.divergence.age}`})——"${last.alternative.slice(0, 50)}..."`
+      : `descending from the prior layer (${last.divergence.moment ?? `~age ${last.divergence.age}`}): "${last.alternative.slice(0, 60)}..."`
+
+    return {
+      divergence: {
+        age: startAge,
+        moment: tpl.moment,
+        event: deeperEvent,
+        alternative: tpl.alternative(subject),
+      },
+      trajectory: [
+        { age: t1, moment: tpl.tj1Moment, state: tpl.tj1() },
+        { age: t2, moment: tpl.tj2Moment, state: tpl.tj2() },
+        { age: t3, moment: tpl.tj3Moment, state: tpl.tj3() },
+        { age: subjectAge, moment: tpl.tjNowMoment, state: tpl.tjNow() },
+      ],
+      outcome: tpl.outcome(),
+      vibe,
+    }
+  })
+
+  return { forks }
 }
 
 // ─────────────────────────────────────────────────────────────────────
