@@ -1,115 +1,368 @@
 <div align="center">
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/hero-dark.png">
+  <img alt="mighta — 你没活过的那些人生" src="./docs/hero-light.png" width="100%">
+</picture>
+
 # mighta
 
 ### _你没活过的那些人生。_
 
-**一个由群体 LLM agent 驱动的反事实人生模拟器。**
+一个由群体 LLM agent 驱动的反事实人生模拟器。<br>
+你给它几个真实的人生岔路 ——<br>
+它孵化出六个走了另一条路的"你"。
 
-你给它几个真实的人生岔路 —— 那些你选了 A 但本可以选 B 的时刻。一群 agent 会孵化出 6 个走了另一条路的"你",让他们慢慢老去,然后告诉你他们后来怎么样了。
+<br>
 
-[**中文**](#中文) · [**English**](./README.md) · [在线 Demo](#) · [截图](#截图)
+<p>
+  <a href="https://github.com/YunyueLi/Mighta/stargazers"><img src="https://img.shields.io/github/stars/YunyueLi/Mighta?style=for-the-badge&logo=github&color=c9a35a&logoColor=fff&labelColor=1a1a1a" alt="Stars"></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/%E5%8D%8F%E8%AE%AE-MIT-c9a35a?style=for-the-badge&labelColor=1a1a1a" alt="MIT"></a>
+  <img src="https://img.shields.io/badge/%E7%89%88%E6%9C%AC-0.1.0-c9a35a?style=for-the-badge&labelColor=1a1a1a" alt="v0.1.0">
+  <img src="https://img.shields.io/badge/%E6%A8%A1%E5%9E%8B-8-c9a35a?style=for-the-badge&labelColor=1a1a1a" alt="8 providers">
+  <img src="https://img.shields.io/badge/%E8%AF%AD%E8%A8%80-8-c9a35a?style=for-the-badge&labelColor=1a1a1a" alt="8 languages">
+</p>
 
-![dark](./docs/hero-dark.png)
+<p>
+  <a href="#-快速开始"><b>快速开始</b></a> ·
+  <a href="#-特性">特性</a> ·
+  <a href="#-截图">截图</a> ·
+  <a href="#%EF%B8%8F-路线图">路线图</a> ·
+  <a href="./README.md"><b>English</b></a>
+</p>
 
 </div>
 
----
+<br>
 
-## 中文
+<div align="center">
 
-### 这是什么
+> _"林中有两条路,而我 ——<br>我选了人迹更少的那条。"_<br>
+> <sub>**Robert Frost** · _The Road Not Taken_</sub>
 
-`mighta` 是一个开源的、纯浏览器端运行的**反事实人生模拟器**。
+</div>
 
-你给它你人生中真实的岔路 —— 那些你做了 A 但本可能做 B 的时刻。模型会孵化出六个走了另一条路的"你",让他们沿着自己的轨迹老去,然后告诉你每一个最后变成了什么样。
+<br>
 
-这是"你,在另一种人生里" —— 但具体、克制、文学。不是星座算命,不是聊天机器人。是对"没走的那条路"的安静凝视,可视化。
+## ✨ 这是什么
 
-> _选一个岔路。一千个走了另一条的你,在那里慢慢老去。看他们后来怎么样了。_
+`mighta` 是一个开源的、**纯浏览器端**运行的反事实人生模拟器。
 
-### 特性
+你给它你人生中真实的岔路 —— 那些你做了 A 但本可能做 B 的时刻。一群 LLM agent 会孵化出六个走了另一条路的"你",让他们沿着各自的轨迹老去,然后告诉你每一个最后变成了什么样。
 
-| 特性 | 说明 |
-|---|---|
-| 🌀 **分叉孵化** | 从你人生的任何一个真实时刻,生成 6 条平行人生 |
-| 📜 **残章还原** | _(即将到来)_ 还原失落的结局、沦陷之城、被涂黑的档案 |
-| 🌳 **分支时间轴** | git-graph 风的 SVG 可视化,悬停查看节点 + 展开 fork 详情 |
-| 🌐 **自带模型** | Anthropic Claude · OpenAI · Gemini · DeepSeek · 通义 · Kimi · GLM · 豆包 |
-| 🌍 **8 种语言** | English · 简体中文 · 繁體中文 · 日本語 · 한국어 · Español · Français · Deutsch |
-| ☀️ **明暗主题** | 暖深 cinematic · 暖米 parchment · 跟随系统 |
-| 📥 **导入任意文本** | 拖入 `.txt`/`.md`(或粘贴),agent 自动提取人生岔路 |
-| ⏱ **细颗粒度时间** | "我 22 岁那个秋天" / "上周" — 不只是年龄数字 |
-| 🔒 **隐私优先** | 密钥只留在你浏览器。没有服务器、没有埋点、不需要账号 |
+这是"你,在另一种人生里" —— **具体、克制、文学**。不是星座算命,不是聊天机器人。是对那条没走的路的安静凝视,可视化。
 
-### 快速开始
+<br>
+
+<table>
+  <tr>
+    <td width="50%">
+      <h3>🌀 孵化你自己。</h3>
+      一千个走了另一条的你,在那里慢慢老去。看其中六个。
+    </td>
+    <td width="50%">
+      <h3>📜 还原已逝之物。</h3>
+      <em>(即将到来)</em> 还原失落的结局、沦陷之城、被涂黑的档案。
+    </td>
+  </tr>
+</table>
+
+<br>
+
+## 🎯 特性
+
+<table>
+<tr>
+<td width="33%" valign="top">
+
+#### 🌳 分支时间轴
+git-graph 风的 SVG 可视化。六条人生线从你的"现在"分叉,各自走向不同的未来。
+
+</td>
+<td width="33%" valign="top">
+
+#### 🌐 自带模型
+Anthropic · OpenAI · Gemini · DeepSeek · 通义 · Kimi · GLM · 豆包
+
+</td>
+<td width="33%" valign="top">
+
+#### 🌍 八种语言
+英 · 简中 · 繁中 · 日 · 韩 · 西 · 法 · 德 —— Claude 用你的语言回答。
+
+</td>
+</tr>
+<tr>
+<td width="33%" valign="top">
+
+#### ☀️ 明暗主题
+暖深 cinematic · 暖米 parchment · 跟随系统。色彩平滑过渡。
+
+</td>
+<td width="33%" valign="top">
+
+#### 📥 导入任意文本
+拖入 `.txt` / `.md`(或粘贴),Claude 自动提取人生岔路。
+
+</td>
+<td width="33%" valign="top">
+
+#### ⏱ 细颗粒度时间
+"我 22 岁那个秋天" / "上周" —— 不只是整数年龄。
+
+</td>
+</tr>
+<tr>
+<td width="33%" valign="top">
+
+#### 🎭 分叉情绪标记
+每个 fork 自带 vibe 标签:<strong>绽放</strong> · <strong>灰烬</strong> · <strong>漂流</strong> · <strong>安静</strong> · <strong>燃烧</strong>。
+
+</td>
+<td width="33%" valign="top">
+
+#### 🎨 Editorial 美学
+Fraunces 衬线 · Caveat 手写体 · CJK 用 Noto · 手绘人群。
+
+</td>
+<td width="33%" valign="top">
+
+#### 🔒 隐私优先
+密钥只留在浏览器。没有服务器、没有埋点、不需要账号、零数据收集。
+
+</td>
+</tr>
+</table>
+
+<br>
+
+## 🚀 快速开始
 
 ```bash
-git clone https://github.com/YunyueLi/mighta.git
-cd mighta
+git clone https://github.com/YunyueLi/Mighta.git
+cd Mighta
 npm install
 npm run dev
-# 打开 http://localhost:5173
 ```
 
-然后:
+然后打开 [`http://localhost:5173`](http://localhost:5173):
 
-1. 点右上角的**设置**齿轮
-2. 选一个**模型提供商**(国内推荐 DeepSeek / 通义 / Kimi / GLM / 豆包)
-3. 粘贴你的 **API 密钥**
-4. 选一个**模型**(Haiku 4.5 便宜快,Sonnet 4.6 更深思)
-5. 进入"**如果**"页,试一下 **史蒂夫·乔布斯** 预设,或者贴你自己的故事,点 **看看本可能的样子**
+1. 点右上角 **⚙ 设置** 齿轮
+2. 选 **模型提供商** —— 按地区:
+   - 🌐 **海外**: Anthropic · OpenAI · Gemini
+   - 🇨🇳 **国内**: DeepSeek · 通义 · Kimi · GLM · 豆包
+3. 粘贴你的 **API 密钥**([去拿一个 →](https://platform.deepseek.com/api_keys))
+4. 选 **模型** —— Haiku 4.5 便宜快; Sonnet 4.6 更深思
+5. 进入"**如果**"页,试一下预设(从 **史蒂夫·乔布斯** 开始),或者贴你自己的故事 → **看看本可能的样子**
 
-### 隐私
+<br>
 
-API 密钥只存在你浏览器的 `localStorage` 里。**浏览器 → 模型提供商,直连。**
-没有服务器,没有埋点,没有账号,不收集任何数据。
+## 🎨 截图
 
-源码可读,自己审。全部是客户端 React。
+<table>
+<tr>
+<td width="50%">
+<a href="./docs/landing-dark.png"><img src="./docs/landing-dark.png" alt="主页 — 暗色"></a>
+<p align="center"><sub>主页 — 暗色</sub></p>
+</td>
+<td width="50%">
+<a href="./docs/landing-light.png"><img src="./docs/landing-light.png" alt="主页 — 亮色"></a>
+<p align="center"><sub>主页 — 亮色</sub></p>
+</td>
+</tr>
+<tr>
+<td width="50%">
+<a href="./docs/timeline.png"><img src="./docs/timeline.png" alt="时间轴视图"></a>
+<p align="center"><sub>如果 — 分支时间轴</sub></p>
+</td>
+<td width="50%">
+<a href="./docs/cards.png"><img src="./docs/cards.png" alt="卡片视图"></a>
+<p align="center"><sub>如果 — 卡片视图</sub></p>
+</td>
+</tr>
+<tr>
+<td width="50%">
+<a href="./docs/importer.png"><img src="./docs/importer.png" alt="导入器"></a>
+<p align="center"><sub>导入任意文本 · 三阶段流程</sub></p>
+</td>
+<td width="50%">
+<a href="./docs/settings.png"><img src="./docs/settings.png" alt="设置"></a>
+<p align="center"><sub>设置 — 8 个提供商,自带密钥</sub></p>
+</td>
+</tr>
+</table>
 
-### 技术栈
+<br>
 
-- **React 19** + **TypeScript** + **Vite 8**
-- **Tailwind CSS 4**(CSS-first 配置,无需 `tailwind.config.js`)
-- **Zustand**(状态) · **react-i18next**(8 语言) · **framer-motion**(动画)
-- **OpenAI SDK** + **Anthropic SDK**(在 `llm.ts` 里统一抽象)
-- **Fraunces**(可变 serif)+ **Caveat**(手写)+ **Inter**(sans)+ **JetBrains Mono** + **Noto Sans/Serif SC/JP/KR**(中日韩)
+## 🔧 技术栈
 
-### 路线图
+<p>
+  <img src="https://img.shields.io/badge/React_19-1a1a1a?style=flat-square&logo=react&logoColor=61dafb" alt="React 19">
+  <img src="https://img.shields.io/badge/TypeScript-1a1a1a?style=flat-square&logo=typescript&logoColor=3178c6" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Vite_8-1a1a1a?style=flat-square&logo=vite&logoColor=646cff" alt="Vite 8">
+  <img src="https://img.shields.io/badge/Tailwind_4-1a1a1a?style=flat-square&logo=tailwindcss&logoColor=06b6d4" alt="Tailwind 4">
+  <img src="https://img.shields.io/badge/Zustand-1a1a1a?style=flat-square&logo=zustand&logoColor=fff" alt="Zustand">
+  <img src="https://img.shields.io/badge/Framer_Motion-1a1a1a?style=flat-square&logo=framer&logoColor=0055ff" alt="Framer Motion">
+  <img src="https://img.shields.io/badge/i18next-1a1a1a?style=flat-square&logo=i18next&logoColor=26a69a" alt="i18next">
+  <img src="https://img.shields.io/badge/Anthropic-1a1a1a?style=flat-square&logoColor=d4a373" alt="Anthropic">
+  <img src="https://img.shields.io/badge/OpenAI-1a1a1a?style=flat-square&logo=openai&logoColor=fff" alt="OpenAI">
+</p>
 
-- [x] 分叉孵化(6 个 fork + 分支时间轴)
-- [x] 8 个模型提供商(海外 3 + 国内 5)
-- [x] 8 种语言 + 浏览器自动检测
-- [x] 明 / 暗 / 自动主题
-- [x] 文件导入 → Claude 自动提取节点
-- [x] 细颗粒度时间(`moment` 字段:上周 / 2019 年 10 月)
-- [ ] **残章还原**模块 — 还原失落的文本/历史/被涂黑的档案
-- [ ] **分享** — 把 fork 导出成图片 / 链接
-- [ ] **再分叉** — 从一个 fork 再分叉(递归 what-if)
-- [ ] **收藏** — 保存历史 fork
-- [ ] **托管 demo** — 带限流的免费 key
+**类型系统:** strict TS · 业务代码零 `any`<br>
+**打包:** Vite 8 + Tailwind 4(CSS-first 配置,无需 `tailwind.config.js`)<br>
+**状态:** Zustand 管全局 + react-i18next 8 种语言 + framer-motion 入场/悬停动效<br>
+**LLM:** OpenAI SDK + Anthropic SDK,通过统一的 `lib/llm/` 抽象 —— 切换 provider 不需要碰功能代码<br>
+**字体:** Fraunces(可变 serif) + Caveat(手写) + Inter(sans) + JetBrains Mono + Noto Sans/Serif(SC · JP · KR)
 
-### 贡献
+<br>
 
-欢迎 Issue / PR。详见 [CONTRIBUTING.md](./CONTRIBUTING.md)。
+## 🏗 架构
 
-如果你做了一个有意思的 preset(历史人物、地区情境、虚构角色),欢迎 PR 加到 `src/lib/presets.ts`。
+```
+src/
+├── pages/
+│   ├── Landing.tsx       editorial hero + 两扇门 + 漂流人群
+│   ├── Spawn.tsx         如果:种子 → 孵化 → 时间轴 / 卡片
+│   ├── Restore.tsx       残章(占位,即将到来)
+│   └── Settings.tsx      提供商 · 模型 · 密钥 · 语言 · 主题
+├── components/
+│   ├── Timeline.tsx      SVG 分支树,悬停详情面板
+│   ├── ForkCard.tsx      单个 fork 卡片
+│   ├── Importer.tsx      三阶段 modal:输入 → 解析 → 预览
+│   ├── Crowd.tsx         12 个手绘人物,慢漂移
+│   ├── LanguageSwitch.tsx / ThemeSwitch.tsx (caret 锚定的 dropdown)
+│   └── Icons.tsx         inline SVG, currentColor(无图标库依赖)
+├── lib/
+│   ├── llm/              provider 注册表 + 统一 callLLM
+│   ├── spawnPrompt.ts    本地化的反事实 system prompt
+│   ├── extractPrompt.ts  bio 文本 → 结构化 forks
+│   ├── presets.ts        4 个名人 + 5 个人生情境
+│   ├── i18n.ts           8 种语言,浏览器自动检测
+│   └── store.ts          Zustand
+└── locales/
+    └── {en, zh, zh-TW, ja, ko, es, fr, de}.json
+```
 
-### 致敬
+<br>
 
-- **[The Public Domain Review](https://publicdomainreview.org)** — 纸 / 档案美学
-- **Anthropic.com** — 暖色克制 editorial 表面
-- **NYT Magazine / A24 / Klim Type** — 字体参考
-- **Robert Frost · [_未走的路_](https://www.poetryfoundation.org/poems/44272/the-road-not-taken)** — 源头
+## 🌍 语言
 
-### 协议
+mighta 会**八种语言**—— UI _和_ LLM 输出都跟着切换:
 
-MIT © 2026 mighta 贡献者们
+| 语言 | 本地名 | UI | Claude 用此语言回答 |
+|---|---|:-:|:-:|
+| English | English | ✓ | ✓ |
+| 简体中文 | Simplified Chinese | ✓ | ✓ |
+| 繁體中文 | Traditional Chinese | ✓ | ✓ |
+| 日本語 | Japanese | ✓ | ✓ |
+| 한국어 | Korean | ✓ | ✓ |
+| Español | Spanish | ✓ | ✓ |
+| Français | French | ✓ | ✓ |
+| Deutsch | German | ✓ | ✓ |
+
+浏览器语言自动检测。Nav 上的语言下拉,或者 Settings 里手动切换。
+
+<br>
+
+## 🔌 提供商
+
+<table>
+<tr>
+<td><b>🌐 海外</b></td>
+<td>
+<a href="https://console.anthropic.com">Anthropic Claude</a> ·
+<a href="https://platform.openai.com">OpenAI</a> ·
+<a href="https://aistudio.google.com">Google Gemini</a>
+</td>
+</tr>
+<tr>
+<td><b>🇨🇳 国内</b></td>
+<td>
+<a href="https://platform.deepseek.com">DeepSeek</a> ·
+<a href="https://bailian.console.aliyun.com">通义千问 Qwen</a> ·
+<a href="https://platform.moonshot.cn">Moonshot Kimi</a> ·
+<a href="https://bigmodel.cn">智谱 GLM</a> ·
+<a href="https://www.volcengine.com">豆包 Doubao</a>
+</td>
+</tr>
+</table>
+
+所有 provider 都是**自带密钥**模式。密钥存在你浏览器的 `localStorage`,不上传任何服务器。
+
+<br>
+
+## 🔒 隐私
+
+> **你的密钥从不离开你的浏览器。**
+
+mighta 是一个**纯静态 SPA**。没有后端、没有服务器、没有埋点、不需要账号。
+请求路径:**浏览器 → 模型提供商,直连**。
+
+源码全部公开。自己审,自己信。
+
+<br>
+
+## 🗺 路线图
+
+- [x] **如果**模块 —— 6 条平行人生 + 分支时间轴
+- [x] **8 个 provider** —— Anthropic + OpenAI + Gemini + 5 个国内 provider
+- [x] **8 种语言** —— UI + LLM 输出,自动检测
+- [x] **明 / 暗 / 自动**主题
+- [x] **文件导入** —— 拖入文本,Claude 自动提取节点
+- [x] **细颗粒度时间** —— `moment` 字段("上周" / "2019 年 10 月")
+- [ ] **残章**模块 —— 还原失落的结局、被涂黑的档案、沦陷之城
+- [ ] **分享** —— 把 fork 导出为图片 / 链接 / OG card
+- [ ] **再分叉** —— 从一个 fork 再分叉(递归 what-if)
+- [ ] **收藏** —— 保存历史 fork
+- [ ] **托管 demo** —— 带限流的免费试用 key
+
+<br>
+
+## ⭐ Star 历史
+
+<a href="https://star-history.com/#YunyueLi/Mighta&Date">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=YunyueLi/Mighta&type=Date&theme=dark">
+    <img alt="Star History" src="https://api.star-history.com/svg?repos=YunyueLi/Mighta&type=Date">
+  </picture>
+</a>
+
+<br>
+
+## 🤝 贡献
+
+欢迎 Issue 和 PR。最简单的贡献:**加一个 preset**(~5 分钟)。
+
+一个新名人(`category: "famous"`)或情境(`category: "scenario"`)直接加到 [`src/lib/presets.ts`](./src/lib/presets.ts)。再在八个 locale 文件加上名字翻译就行。
+
+详见 [CONTRIBUTING.md](./CONTRIBUTING.md)(新语言、新 provider、新模块的指南)。
+
+**风格:** 克制优于花哨 · 具体优于抽象 · 真实的岔路是"某个十月的周二",不是"22 岁"。
+
+<br>
+
+## 🎬 致敬
+
+- **Robert Frost** —— _[未走的路](https://www.poetryfoundation.org/poems/44272/the-road-not-taken)_ · 源头
+- **[The Public Domain Review](https://publicdomainreview.org)** · 纸与档案的美学
+- **Anthropic.com** · 暖色克制的 editorial 表面
+- **NYT Magazine, A24 films, Klim Type** · 字体
+- **《滑动门》**(1998)& **《人生切割术》** · 反事实自我
+
+<br>
+
+## 📄 协议
+
+[MIT](./LICENSE) © 2026 mighta 贡献者们
+
+<br>
 
 ---
 
 <div align="center">
 
-_由一群 LLM agent 推演 · 自带密钥 · 只在你浏览器里_
+<sub>由一群 LLM agent 推演 · 自带密钥 · 只留在你浏览器里</sub><br>
+<sub>· · ·</sub><br>
+<sub>如果 mighta 给你看到了一个你没料到的自己 —— <a href="https://github.com/YunyueLi/Mighta/stargazers">⭐ 给个 star</a>。</sub>
 
 </div>
