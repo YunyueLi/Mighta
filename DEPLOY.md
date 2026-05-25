@@ -1,73 +1,48 @@
-# Deploy mighta to Cloudflare Pages
+# Deploy mighta
 
-Two paths — pick one. Path A is one-time setup, then every `git push` auto-deploys. Path B is a manual one-shot.
-
----
-
-## Path A · Dashboard (recommended — continuous deploy)
-
-1. Go to <https://dash.cloudflare.com/?to=/:account/workers-and-pages>
-2. Click **Create application** → **Pages** tab → **Connect to Git**
-3. Authorize Cloudflare to read your GitHub account (one-time)
-4. Pick the repo: **YunyueLi/Mighta**
-5. Set build configuration:
-
-| Field | Value |
-|---|---|
-| Framework preset | `None` (or `Vite` — both work) |
-| Build command | `npm run build` |
-| Build output directory | `dist` |
-| Root directory | _(leave blank)_ |
-| Node version | `22` (set as env var `NODE_VERSION=22` if needed) |
-
-6. Click **Save and Deploy**. First build takes ~90 seconds.
-7. You'll get a URL like `mighta.pages.dev`. Tell that URL back to the README + GitHub homepage (see "After deploy" below).
-
-From here on, every `git push` to `main` auto-deploys. Branch pushes get preview URLs.
+mighta is a pure static SPA. Two confirmed paths:
 
 ---
 
-## Path B · CLI (one-shot, no GitHub integration)
+## GitHub Pages (current production)
 
-You need to be logged in to Cloudflare once:
+**URL:** [https://yunyueli.github.io/Mighta/](https://yunyueli.github.io/Mighta/)
+
+Set up via `.github/workflows/pages.yml`. Every push to `main` rebuilds and redeploys (~60s).
+
+**One-time setup** (only needed if forking):
+
+1. Push `.github/workflows/pages.yml` to your fork.
+2. Go to **Settings → Pages**.
+3. Under **Source**, pick **GitHub Actions**.
+4. Push to `main` — the workflow takes over.
+
+**SPA caveat**: the workflow copies `dist/index.html` to `dist/404.html` so that GitHub Pages serves the React app on every path (including deep links like `/spawn`, `/settings`). React Router takes over from there.
+
+**Path-based base URL**: Vite is configured with `base: '/Mighta/'` in production (matching the repo name). React Router uses `basename={import.meta.env.BASE_URL}` so client routing works seamlessly.
+
+---
+
+## Cloudflare Workers + Static Assets (alternative)
+
+Kept for reference. To deploy via Cloudflare instead:
 
 ```bash
-npx wrangler login
-# (opens a browser, click "Allow")
+npx wrangler login        # one-time, browser OAuth
+npm run deploy            # wraps wrangler pages deploy
 ```
 
-Then anytime:
+`wrangler.toml` is set up for [assets] static site mode with `not_found_handling = "single-page-application"`.
 
-```bash
-npm run deploy
-```
-
-That runs `npm run build && wrangler pages deploy dist`. First run creates the `mighta` Pages project automatically; later runs upload to it.
+You'll want to set `base: '/'` in `vite.config.ts` if you switch — Cloudflare serves at the root of the worker domain, not a path prefix.
 
 ---
-
-## After deploy
-
-Once you have a URL (e.g. `https://mighta.pages.dev`):
-
-```bash
-# Set the repo's homepage on GitHub
-gh repo edit --homepage "https://mighta.pages.dev"
-
-# Update the README — replace the placeholder Live Demo link
-sed -i '' 's|](#)|](https://mighta.pages.dev)|g' README.md README-zh.md
-
-git add README.md README-zh.md
-git commit -m "docs: live demo URL"
-git push
-```
-
----
-
-## SPA caveat
-
-`public/_redirects` rewrites every path to `/index.html` (status 200) so deep links like `/spawn` and `/settings` work after a hard reload. Cloudflare Pages reads this file at the project root of `dist/` automatically.
 
 ## Custom domain (later)
 
-When you're ready: Cloudflare dashboard → your Pages project → **Custom domains** → add `mighta.app` (or whatever) → CNAME, automatic SSL.
+When you're ready:
+
+- **GitHub Pages**: Settings → Pages → Custom domain → add `mighta.app`. Set CNAME `mighta.app → yunyueli.github.io` at your DNS provider.
+- **Cloudflare**: dashboard → your project → Custom domains → add → CNAME, automatic SSL.
+
+Custom domain bypasses the `*.github.io` / `*.workers.dev` DNS issues some networks have.

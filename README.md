@@ -16,7 +16,7 @@ It spawns six versions of you that took the other one.
 <br>
 
 <p>
-  <a href="https://mighta.xuanlyy.workers.dev"><img src="https://img.shields.io/badge/LIVE_DEMO-mighta.xuanlyy.workers.dev-c9a35a?style=for-the-badge&logo=cloudflare&logoColor=fff&labelColor=1a1a1a" alt="Live Demo"></a>
+  <a href="https://yunyueli.github.io/Mighta/"><img src="https://img.shields.io/badge/LIVE_DEMO-yunyueli.github.io%2FMighta-c9a35a?style=for-the-badge&logo=github&logoColor=fff&labelColor=1a1a1a" alt="Live Demo"></a>
   <a href="https://github.com/YunyueLi/Mighta/stargazers"><img src="https://img.shields.io/github/stars/YunyueLi/Mighta?style=for-the-badge&logo=github&color=c9a35a&logoColor=fff&labelColor=1a1a1a" alt="Stars"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/LICENSE-MIT-c9a35a?style=for-the-badge&labelColor=1a1a1a" alt="MIT"></a>
   <img src="https://img.shields.io/badge/VERSION-0.1.0-c9a35a?style=for-the-badge&labelColor=1a1a1a" alt="v0.1.0">
@@ -25,7 +25,7 @@ It spawns six versions of you that took the other one.
 </p>
 
 <p>
-  <a href="https://mighta.xuanlyy.workers.dev"><b>🚀 Try it now →</b></a> ·
+  <a href="https://yunyueli.github.io/Mighta/"><b>🚀 Try it now →</b></a> ·
   <a href="#-quick-start">Quick Start</a> ·
   <a href="#-features">Features</a> ·
   <a href="#-screenshots">Screenshots</a> ·
