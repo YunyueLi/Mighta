@@ -1,5 +1,9 @@
-# Cloudflare Pages config
-# Used by `wrangler pages deploy` and by the Cloudflare Pages GitHub integration.
+# Cloudflare Workers + Static Assets config (modern unified format)
+# Deploy: `npx wrangler deploy`
 name = "mighta"
-pages_build_output_dir = "dist"
 compatibility_date = "2025-01-01"
+
+[assets]
+directory = "./dist"
+# SPA fallback — any unknown path serves /index.html with the React router taking over
+not_found_handling = "single-page-application"
