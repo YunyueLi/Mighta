@@ -16,6 +16,7 @@
 <br>
 
 <p>
+  <a href="https://mighta.xuanlyy.workers.dev"><img src="https://img.shields.io/badge/%E5%9C%A8%E7%BA%BF%E8%AF%95%E7%94%A8-mighta.xuanlyy.workers.dev-c9a35a?style=for-the-badge&logo=cloudflare&logoColor=fff&labelColor=1a1a1a" alt="Live Demo"></a>
   <a href="https://github.com/YunyueLi/Mighta/stargazers"><img src="https://img.shields.io/github/stars/YunyueLi/Mighta?style=for-the-badge&logo=github&color=c9a35a&logoColor=fff&labelColor=1a1a1a" alt="Stars"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/%E5%8D%8F%E8%AE%AE-MIT-c9a35a?style=for-the-badge&labelColor=1a1a1a" alt="MIT"></a>
   <img src="https://img.shields.io/badge/%E7%89%88%E6%9C%AC-0.1.0-c9a35a?style=for-the-badge&labelColor=1a1a1a" alt="v0.1.0">
@@ -24,7 +25,8 @@
 </p>
 
 <p>
-  <a href="#-快速开始"><b>快速开始</b></a> ·
+  <a href="https://mighta.xuanlyy.workers.dev"><b>🚀 立刻试用 →</b></a> ·
+  <a href="#-快速开始">快速开始</a> ·
   <a href="#-特性">特性</a> ·
   <a href="#-截图">截图</a> ·
   <a href="#%EF%B8%8F-路线图">路线图</a> ·
