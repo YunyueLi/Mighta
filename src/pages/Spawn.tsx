@@ -45,9 +45,12 @@ export default function Spawn() {
   const [error, setError] = useState<string | null>(null)
 
   // Auto-sync phase when versions are externally hydrated (e.g. screenshot tool, future undo)
-  useEffect(() => {
+  // Render-time prev tracking is the React 19 canonical replacement for useEffect+setState.
+  const [prevVersionsLen, setPrevVersionsLen] = useState(versions.length)
+  if (prevVersionsLen !== versions.length) {
+    setPrevVersionsLen(versions.length)
     if (versions.length > 0 && phase === "seed") setPhase("results")
-  }, [versions.length, phase])
+  }
 
   const provider = creds ? getProvider(creds.providerId) : null
   const canGenerate = seed.age > 0 && seed.nodes.length > 0 && !!creds

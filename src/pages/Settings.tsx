@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react"
+import { useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { motion } from "framer-motion"
@@ -20,11 +20,14 @@ export default function Settings() {
   const [show, setShow] = useState(false)
   const [saved, setSaved] = useState(false)
 
-  useEffect(() => {
-    setDraftKey(creds[activeProvider]?.apiKey ?? "")
-    setDraftModel(creds[activeProvider]?.model || provider.defaultModel)
+  // Sync drafts when active provider changes (render-time prev tracking — React 19 canonical)
+  const [prevActive, setPrevActive] = useState(activeProvider)
+  if (prevActive !== activeProvider) {
+    setPrevActive(activeProvider)
+    setDraftKey(current?.apiKey ?? "")
+    setDraftModel(current?.model || provider.defaultModel)
     setSaved(false)
-  }, [activeProvider, creds, provider.defaultModel])
+  }
 
   const dirty =
     draftKey.trim() !== (current?.apiKey ?? "") ||

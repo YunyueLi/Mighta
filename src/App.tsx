@@ -5,7 +5,7 @@ import Landing from "./pages/Landing"
 import Spawn from "./pages/Spawn"
 import Restore from "./pages/Restore"
 import Settings from "./pages/Settings"
-import { useThemeInit } from "./components/ThemeSwitch"
+import { useThemeInit } from "./lib/theme"
 
 export default function App() {
   useThemeInit()

@@ -4,29 +4,6 @@ import { useTranslation } from "react-i18next"
 import { Sun, Moon, Monitor } from "./Icons"
 import { useSettings, type ThemeMode } from "../lib/store"
 
-function resolveTheme(mode: ThemeMode): "light" | "dark" {
-  if (mode === "auto") {
-    return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"
-  }
-  return mode
-}
-
-function applyTheme(mode: ThemeMode) {
-  document.documentElement.dataset.theme = resolveTheme(mode)
-}
-
-export function useThemeInit() {
-  const theme = useSettings((s) => s.theme)
-  useEffect(() => {
-    applyTheme(theme)
-    if (theme !== "auto") return
-    const mq = window.matchMedia("(prefers-color-scheme: light)")
-    const handler = () => applyTheme("auto")
-    mq.addEventListener("change", handler)
-    return () => mq.removeEventListener("change", handler)
-  }, [theme])
-}
-
 const THEMES: Array<{ code: ThemeMode; label: string; short: string; Icon: typeof Sun }> = [
   { code: "auto", label: "Auto", short: "AUTO", Icon: Monitor },
   { code: "light", label: "Light", short: "LT", Icon: Sun },
