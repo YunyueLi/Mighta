@@ -94,7 +94,8 @@ export interface LifeNode {
 export interface TrajectoryStep {
   age: number
   moment?: string      // free-text granular time (LLM may output this)
-  state: string
+  brief?: string       // ≤ 1 short sentence — Timeline scan-view summary
+  state: string        // 3-5 sentence paragraph — Cards long-read body
 }
 
 export interface ForkVersion {

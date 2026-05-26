@@ -23,6 +23,14 @@ import type { ForkVersion } from "../lib/store"
 
 const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
 
+// First-sentence fallback for scan view when LLM didn't return a `brief`.
+// Splits on the first sentence-ending punctuation (latin + CJK) — never mid-clause.
+function previewOf(step: { brief?: string; state: string }): string {
+  if (step.brief && step.brief.trim()) return step.brief.trim()
+  const m = step.state.match(/^([^.。!?！？\n]+[.。!?！？])/u)
+  return m ? m[1].trim() : step.state
+}
+
 // vibe → CSS color expression
 const vibeColor: Record<ForkVersion["vibe"], string> = {
   shine: "var(--color-accent)",
@@ -348,7 +356,7 @@ function Lane({
                 </span>
               </div>
               <p className="text-fg-soft text-[12.5px] leading-[1.6] text-balance">
-                {step.state}
+                {previewOf(step)}
               </p>
             </li>
           ))}

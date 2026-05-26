@@ -1,12 +1,14 @@
 /**
  * ForkCard — a single chapter in the cards/long-read view.
  *
- * Unlike Timeline lanes (which are wide-grid quick-scan columns), each card
- * is a self-contained chapter laid out like a magazine short story: section
- * headers in small-caps, a display-weight alternative, an always-expanded
- * trajectory rail with bullet markers, and a vibe-colored capstone for the
- * outcome. Trajectories are no longer hidden behind an expander — long-read
- * means the reader doesn't have to ask for the rest.
+ * Each card is a self-contained literary chapter: a quiet chapter mark, the
+ * forking moment, the alternative as display-weight head, then the trajectory
+ * as a stack of *paragraphs* (not bullets, not bullets, never bullets) with
+ * delicate inline date markers. Outcome lands as the closing graf under a
+ * vibe-colored hairline.
+ *
+ * Designed for the new prompt schema where each trajectory step carries a
+ * 3-5 sentence paragraph in `state`. The shape is: read it, don't scan it.
  */
 
 import { useTranslation } from "react-i18next"
@@ -44,143 +46,130 @@ export default function ForkCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.7, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-      className="card relative px-7 py-10 md:px-12 md:py-14 scroll-mt-24"
+      className="card relative px-7 py-12 md:px-14 md:py-16 scroll-mt-24"
     >
-      {/* ── Chapter header ─────────────────────────────────────────── */}
+      {/* ── Chapter mark — restrained: small caps in a single line ───── */}
       <header className="mb-12">
-        <p
-          className="small-caps text-[10px] mb-4 tracking-[0.28em]"
-          style={{ color }}
-        >
-          {t("spawn.cards_chapter", { defaultValue: "chapter" })}
-        </p>
-
-        <div className="flex items-baseline gap-5 flex-wrap mb-5">
+        <div className="flex items-center gap-4">
           <span
-            className="script"
-            style={{
-              fontSize: "clamp(3rem, 5.5vw, 4.5rem)",
-              lineHeight: 0.85,
-              color,
-            }}
+            className="folio text-[10px] tracking-[0.32em]"
+            style={{ color }}
           >
-            {numeral}.
+            {t("spawn.cards_chapter", { defaultValue: "chapter" })}{" "}
+            <span className="text-fg-faint mx-0.5">·</span> {numeral}
           </span>
-          <div className="flex flex-col">
-            <span
-              className="folio text-[10.5px] tracking-[0.24em]"
-              style={{ color }}
-            >
-              {t(`vibe.${fork.vibe}`)}
-            </span>
-            <span className="folio text-[10px] text-fg-faint mt-1 tracking-[0.18em]">
-              {t("spawn.card_age", { age: fork.divergence.age })}
-            </span>
-          </div>
+          <hr
+            className="flex-1 border-0 h-px"
+            style={{ background: color, opacity: 0.32 }}
+          />
+          <span
+            className="folio text-[10px] tracking-[0.28em]"
+            style={{ color }}
+          >
+            {t(`vibe.${fork.vibe}`)}
+          </span>
         </div>
-
-        <hr
-          className="border-0 h-px w-16"
-          style={{ background: color, opacity: 0.7 }}
-        />
       </header>
 
-      {/* ── Section 1: the moment ──────────────────────────────────── */}
-      <section className="mb-10">
-        <SectionLabel>{t("spawn.card_instead_of")}</SectionLabel>
-        <p className="serif-italic text-fg-soft text-[16px] md:text-[17px] leading-[1.6] text-balance">
+      {/* ── Opening: the moment + alternative ─────────────────────────── */}
+      <section className="mb-14">
+        <p className="small-caps text-[9.5px] text-fg-faint mb-3 tracking-[0.26em]">
+          {t("spawn.card_instead_of")}
+          <span className="text-fg-faint/60 mx-2">·</span>
+          {t("spawn.card_age", { age: fork.divergence.age })}
+        </p>
+        <p className="serif-italic text-fg-soft text-[15px] md:text-[16px] leading-[1.62] text-balance mb-9">
           &ldquo;{fork.divergence.event}&rdquo;
         </p>
-      </section>
 
-      {/* ── Section 2: you mighta — the alternative, display weight ── */}
-      <section className="mb-12">
-        <SectionLabel style={{ color }}>{t("spawn.card_you")}</SectionLabel>
         <p
-          className="text-fg leading-[1.18] text-balance"
+          className="small-caps text-[9.5px] mb-4 tracking-[0.26em]"
+          style={{ color }}
+        >
+          {t("spawn.card_you")}
+        </p>
+        <h2
+          className="text-fg leading-[1.12] text-balance"
           style={{
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(1.55rem, 2.4vw, 2.2rem)",
-            fontWeight: 460,
-            letterSpacing: "-0.02em",
+            fontSize: "clamp(1.7rem, 2.6vw, 2.4rem)",
+            fontWeight: 470,
+            letterSpacing: "-0.022em",
           }}
         >
           {fork.divergence.alternative}
-        </p>
+        </h2>
       </section>
 
-      {/* ── Section 3: the road — trajectory, expanded by default ──── */}
-      <section className="mb-12">
-        <SectionLabel>
+      {/* ── The road — trajectory as paragraphs, not bullets ──────────── */}
+      <section className="mb-14">
+        <p className="small-caps text-[9.5px] text-fg-faint mb-10 tracking-[0.26em]">
           {t("spawn.cards_section_road", { defaultValue: "the road there" })}
-        </SectionLabel>
-        <ol className="relative pl-7 space-y-7">
-          {/* vertical rail */}
-          <span
-            aria-hidden
-            className="absolute left-[9px] top-2 bottom-2 w-px"
-            style={{
-              background: `linear-gradient(to bottom, ${color} 0%, ${color} 70%, transparent 100%)`,
-              opacity: 0.4,
-            }}
-          />
+        </p>
+
+        <div className="space-y-12 md:space-y-14">
           {fork.trajectory.map((step, i) => (
-            <li key={i} className="relative">
-              <span
-                aria-hidden
-                className="absolute -left-[22px] top-[10px] w-2 h-2 rounded-full"
-                style={{ background: color }}
-              />
-              <span
-                aria-hidden
-                className="absolute -left-[26px] top-[6px] w-3 h-3 rounded-full"
-                style={{ background: color, opacity: 0.14 }}
-              />
-              <div className="flex items-baseline gap-3 mb-1.5 flex-wrap">
+            <article key={i} className="beat">
+              {/* Beat header: moment + age + thin vibe rule extends right */}
+              <header className="flex items-baseline gap-3 mb-4 flex-wrap">
                 {step.moment ? (
-                  <span className="script text-fg text-[18px] leading-tight">
+                  <span className="script text-fg text-[19px] md:text-[20px] leading-tight">
                     {step.moment}
                   </span>
-                ) : null}
-                <span className="folio text-[10px] tracking-[0.18em]">
-                  {step.moment
-                    ? `~${step.age}`
-                    : t("spawn.card_age", { age: step.age })}
-                </span>
-              </div>
-              <p className="text-fg-soft text-[14.5px] md:text-[15px] leading-[1.8] text-balance">
+                ) : (
+                  <span className="folio text-[10.5px] tracking-[0.2em]" style={{ color }}>
+                    {t("spawn.card_age", { age: step.age })}
+                  </span>
+                )}
+                {step.moment && (
+                  <span className="folio text-[10.5px] tracking-[0.2em] text-fg-faint">
+                    ~{step.age}
+                  </span>
+                )}
+                <span
+                  aria-hidden
+                  className="flex-1 h-px min-w-[40px]"
+                  style={{ background: color, opacity: 0.18 }}
+                />
+              </header>
+
+              {/* The paragraph — generous leading, balanced wrap */}
+              <p
+                className="text-fg-soft text-[15.5px] md:text-[16.5px] leading-[1.86] text-balance"
+                style={{ fontWeight: 410 }}
+              >
                 {step.state}
               </p>
-            </li>
+            </article>
           ))}
-        </ol>
+        </div>
       </section>
 
-      {/* ── Section 4: where it ended — outcome, vibe-rule top ─────── */}
+      {/* ── Outcome — closing graf under a vibe hairline ──────────────── */}
       <section
-        className="pt-8 mb-2"
-        style={{
-          borderTop: `1px solid ${color}`,
-          borderTopColor: color,
-        }}
+        className="pt-9 mb-2"
+        style={{ borderTop: `1px solid ${color}` }}
       >
-        <SectionLabel style={{ color }}>
-          {t("spawn.timeline_legend_now")}
-        </SectionLabel>
         <p
-          className="text-fg text-[15.5px] md:text-[16px] leading-[1.75] text-balance"
-          style={{ fontWeight: 440 }}
+          className="small-caps text-[9.5px] mb-4 tracking-[0.26em]"
+          style={{ color }}
+        >
+          {t("spawn.timeline_legend_now")}
+        </p>
+        <p
+          className="text-fg text-[16px] md:text-[17px] leading-[1.78] text-balance"
+          style={{ fontWeight: 445 }}
         >
           {fork.outcome}
         </p>
       </section>
 
-      {/* ── Footer: re-fork CTA ─────────────────────────────────────── */}
+      {/* ── Footer: re-fork CTA ───────────────────────────────────────── */}
       {onReFork && (
-        <footer className="mt-12 flex justify-end">
+        <footer className="mt-14 flex justify-end">
           <button
             onClick={onReFork}
-            className="folio inline-flex items-center gap-2 px-4 py-2 rounded-full border transition-all"
+            className="folio inline-flex items-center gap-2 px-4 py-2 rounded-full border transition-all hover:bg-bg-soft/40"
             style={{ borderColor: color, color }}
             title={t("spawn.refork_hint")}
           >
@@ -190,24 +179,5 @@ export default function ForkCard({
         </footer>
       )}
     </motion.article>
-  )
-}
-
-/* ── Tiny section label primitive ───────────────────────────────────── */
-
-function SectionLabel({
-  children,
-  style,
-}: {
-  children: React.ReactNode
-  style?: React.CSSProperties
-}) {
-  return (
-    <p
-      className="small-caps text-[10px] text-fg-faint mb-3 tracking-[0.26em]"
-      style={style}
-    >
-      {children}
-    </p>
   )
 }
