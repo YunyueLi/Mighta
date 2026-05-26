@@ -371,8 +371,7 @@ export default function Spawn() {
                   >
                     <Timeline
                       versions={versions}
-                      seedAge={seed.age}
-                      seedNodes={seed.nodes}
+                      onReFork={(v) => generate(v)}
                     />
                   </motion.div>
                 ) : (
