@@ -26,10 +26,11 @@
 
 <p>
   <a href="https://yunyueli.github.io/Mighta/"><b>🚀 立刻试用 →</b></a> ·
-  <a href="#-快速开始">快速开始</a> ·
   <a href="#-特性">特性</a> ·
+  <a href="#-怎么跑起来">怎么跑起来</a> ·
+  <a href="#%EF%B8%8F-架构">架构</a> ·
+  <a href="#-快速开始">快速开始</a> ·
   <a href="#-截图">截图</a> ·
-  <a href="#%EF%B8%8F-路线图">路线图</a> ·
   <a href="./README.md"><b>English</b></a>
 </p>
 
@@ -138,6 +139,28 @@ Fraunces 衬线 · Caveat 手写体 · CJK 用 Noto · 手绘人群。
 
 <br>
 
+## 🌀 怎么跑起来
+
+一个 seed，五个阶段，一扇人生的扇面。一次点击拆成几千个 prompt token，再聚成 6 个结构化的 `ForkVersion` —— 每一个都能从 19 岁活到 80 岁。
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/diagram-spawn-flow-dark.svg">
+  <img alt="spawn 管线 —— 从一次岔路到一扇人生" src="./docs/diagram-spawn-flow-light.svg" width="100%">
+</picture>
+
+<br>
+
+## 🧬 一个 fork 的解剖
+
+每一个版本的你都是 **五个字段、一种 vibe** —— 严格的 schema，让 LLM 不漂、让 timeline 和卡片渲染一致。
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/diagram-fork-anatomy-dark.svg">
+  <img alt="一个 fork 的解剖 —— 一种活法长什么样" src="./docs/diagram-fork-anatomy-light.svg" width="100%">
+</picture>
+
+<br>
+
 ## 🚀 快速开始
 
 ```bash
@@ -220,30 +243,23 @@ npm run dev
 
 ## 🏗 架构
 
-```
-src/
-├── pages/
-│   ├── Landing.tsx       editorial hero + 两扇门 + 漂流人群
-│   ├── Spawn.tsx         如果:种子 → 孵化 → 时间轴 / 卡片
-│   ├── Restore.tsx       残章(占位,即将到来)
-│   └── Settings.tsx      提供商 · 模型 · 密钥 · 语言 · 主题
-├── components/
-│   ├── Timeline.tsx      SVG 分支树,悬停详情面板
-│   ├── ForkCard.tsx      单个 fork 卡片
-│   ├── Importer.tsx      三阶段 modal:输入 → 解析 → 预览
-│   ├── Crowd.tsx         12 个手绘人物,慢漂移
-│   ├── LanguageSwitch.tsx / ThemeSwitch.tsx (caret 锚定的 dropdown)
-│   └── Icons.tsx         inline SVG, currentColor(无图标库依赖)
-├── lib/
-│   ├── llm/              provider 注册表 + 统一 callLLM
-│   ├── spawnPrompt.ts    本地化的反事实 system prompt
-│   ├── extractPrompt.ts  bio 文本 → 结构化 forks
-│   ├── presets.ts        4 个名人 + 5 个人生情境
-│   ├── i18n.ts           8 种语言,浏览器自动检测
-│   └── store.ts          Zustand
-└── locales/
-    └── {en, zh, zh-TW, ja, ko, es, fr, de}.json
-```
+一个静态 SPA，**中间没有服务器**。你的 key、你的模型、你的文本 —— 请求从浏览器直接打到你选的那家 provider。
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/diagram-architecture-dark.svg">
+  <img alt="架构 —— browser-only · bring your own key" src="./docs/diagram-architecture-light.svg" width="100%">
+</picture>
+
+<br>
+
+## 📁 代码结构
+
+四叶（`pages` · `components` · `lib` · `locales`），共用一个 Zustand store 和一套 Tailwind 4 表层。
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/diagram-codebase-dark.svg">
+  <img alt="代码结构 —— 代码怎么摆的" src="./docs/diagram-codebase-light.svg" width="100%">
+</picture>
 
 <br>
 

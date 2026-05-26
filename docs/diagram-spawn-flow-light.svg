@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 720" font-family="'Inter','SF Pro Text',system-ui,sans-serif" role="img" aria-label="spawn pipeline">
+  <defs>
+    <marker id="arrow-light" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto-start-reverse">
+      <path d="M0,2 L10,6 L0,10 z" fill="#6e6149"/>
+    </marker>
+    <marker id="arrow-accent-light" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto-start-reverse">
+      <path d="M0,2 L10,6 L0,10 z" fill="#936a26"/>
+    </marker>
+    <pattern id="paper-light" x="0" y="0" width="220" height="220" patternUnits="userSpaceOnUse">
+      <rect width="220" height="220" fill="#f5efdf"/>
+      <circle cx="40" cy="60" r="0.6" fill="#aea283" opacity="0.18"/>
+      <circle cx="160" cy="30" r="0.5" fill="#aea283" opacity="0.14"/>
+      <circle cx="100" cy="170" r="0.7" fill="#aea283" opacity="0.20"/>
+      <circle cx="190" cy="120" r="0.4" fill="#aea283" opacity="0.10"/>
+      <circle cx="20" cy="190" r="0.5" fill="#aea283" opacity="0.12"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="720" fill="url(#paper-light)"/>
+  
+    <g>
+      <text x="800" y="58" text-anchor="middle" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="11" font-weight="600" letter-spacing="3.2" fill="#936a26">spawn pipeline</text>
+      <text x="800" y="102" text-anchor="middle" font-family="'Fraunces','EB Garamond',Georgia,serif" font-size="28" font-weight="500" fill="#1d1810">from one fork to a fan of lives</text>
+      <text x="800" y="132" text-anchor="middle" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#6e6149">a single click splits into a few thousand prompt tokens and a fan of futures</text>
+      <line x1="740" y1="150" x2="860" y2="150" stroke="#936a26" stroke-width="1" opacity="0.6"/>
+    </g>
+  
+      <g>
+        <rect x="41.666666666666664" y="220" width="270" height="360" rx="14" ry="14" fill="#fbf6e7" stroke="rgba(29,24,16,0.18)" stroke-width="1"/>
+        <text x="176.66666666666666" y="258" text-anchor="middle" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="9" font-weight="600" letter-spacing="2.2" fill="#936a26">01 · seed</text>
+        <text x="176.66666666666666" y="298" text-anchor="middle" font-family="'Fraunces','EB Garamond',Georgia,serif" font-size="22" font-weight="500" fill="#1d1810">your fork</text>
+        <line x1="146.66666666666666" y1="318" x2="206.66666666666666" y2="318" stroke="#936a26" stroke-width="1" opacity="0.7"/>
+        
+          <g>
+            <circle cx="77.66666666666666" cy="362" r="2.5" fill="#936a26"/>
+            <text x="91.66666666666666" y="366" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#3d3324">name · age</text>
+          </g>
+          <g>
+            <circle cx="77.66666666666666" cy="398" r="2.5" fill="#936a26"/>
+            <text x="91.66666666666666" y="402" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#3d3324">the moment it forked</text>
+          </g>
+          <g>
+            <circle cx="77.66666666666666" cy="434" r="2.5" fill="#936a26"/>
+            <text x="91.66666666666666" y="438" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#3d3324">the road taken</text>
+          </g>
+        <line x1="65.66666666666666" y1="520" x2="287.6666666666667" y2="520" stroke="rgba(29,24,16,0.18)" stroke-width="1"/>
+        <text x="176.66666666666666" y="548" text-anchor="middle" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="11" fill="#6e6149">what really happened</text>
+      </g>
+    
+      <g>
+        <rect x="353.33333333333337" y="220" width="270" height="360" rx="14" ry="14" fill="#fbf6e7" stroke="rgba(29,24,16,0.18)" stroke-width="1"/>
+        <text x="488.33333333333337" y="258" text-anchor="middle" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="9" font-weight="600" letter-spacing="2.2" fill="#936a26">02 · prompt</text>
+        <text x="488.33333333333337" y="298" text-anchor="middle" font-family="'Fraunces','EB Garamond',Georgia,serif" font-size="22" font-weight="500" fill="#1d1810">system prompt</text>
+        <line x1="458.33333333333337" y1="318" x2="518.3333333333334" y2="318" stroke="#936a26" stroke-width="1" opacity="0.7"/>
+        
+          <g>
+            <circle cx="389.33333333333337" cy="362" r="2.5" fill="#936a26"/>
+            <text x="403.33333333333337" y="366" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#3d3324">localized vibe table</text>
+          </g>
+          <g>
+            <circle cx="389.33333333333337" cy="398" r="2.5" fill="#936a26"/>
+            <text x="403.33333333333337" y="402" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#3d3324">constraints · distinct lives</text>
+          </g>
+          <g>
+            <circle cx="389.33333333333337" cy="434" r="2.5" fill="#936a26"/>
+            <text x="403.33333333333337" y="438" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#3d3324">specific, restrained, literary</text>
+          </g>
+        <line x1="377.33333333333337" y1="520" x2="599.3333333333334" y2="520" stroke="rgba(29,24,16,0.18)" stroke-width="1"/>
+        <text x="488.33333333333337" y="548" text-anchor="middle" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="11" fill="#6e6149">buildSpawnSystem()</text>
+      </g>
+    
+      <g>
+        <rect x="665" y="220" width="270" height="360" rx="14" ry="14" fill="#fbf6e7" stroke="rgba(29,24,16,0.18)" stroke-width="1"/>
+        <text x="800" y="258" text-anchor="middle" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="9" font-weight="600" letter-spacing="2.2" fill="#936a26">03 · llm</text>
+        <text x="800" y="298" text-anchor="middle" font-family="'Fraunces','EB Garamond',Georgia,serif" font-size="22" font-weight="500" fill="#1d1810">swarm call</text>
+        <line x1="770" y1="318" x2="830" y2="318" stroke="#936a26" stroke-width="1" opacity="0.7"/>
+        
+          <g>
+            <circle cx="701" cy="362" r="2.5" fill="#936a26"/>
+            <text x="715" y="366" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#3d3324">one provider · one stream</text>
+          </g>
+          <g>
+            <circle cx="701" cy="398" r="2.5" fill="#936a26"/>
+            <text x="715" y="402" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#3d3324">any of 8 models</text>
+          </g>
+          <g>
+            <circle cx="701" cy="434" r="2.5" fill="#936a26"/>
+            <text x="715" y="438" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#3d3324">byo key</text>
+          </g>
+        <line x1="689" y1="520" x2="911" y2="520" stroke="rgba(29,24,16,0.18)" stroke-width="1"/>
+        <text x="800" y="548" text-anchor="middle" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="11" fill="#6e6149">callLLM()</text>
+      </g>
+    
+      <g>
+        <rect x="976.6666666666666" y="220" width="270" height="360" rx="14" ry="14" fill="#fbf6e7" stroke="rgba(29,24,16,0.18)" stroke-width="1"/>
+        <text x="1111.6666666666665" y="258" text-anchor="middle" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="9" font-weight="600" letter-spacing="2.2" fill="#936a26">04 · parse</text>
+        <text x="1111.6666666666665" y="298" text-anchor="middle" font-family="'Fraunces','EB Garamond',Georgia,serif" font-size="22" font-weight="500" fill="#1d1810">raw → fork</text>
+        <line x1="1081.6666666666665" y1="318" x2="1141.6666666666665" y2="318" stroke="#936a26" stroke-width="1" opacity="0.7"/>
+        
+          <g>
+            <circle cx="1012.6666666666666" cy="362" r="2.5" fill="#936a26"/>
+            <text x="1026.6666666666665" y="366" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#3d3324">RawFork[] → ForkVersion[]</text>
+          </g>
+          <g>
+            <circle cx="1012.6666666666666" cy="398" r="2.5" fill="#936a26"/>
+            <text x="1026.6666666666665" y="402" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#3d3324">vibe · trajectory · outcome</text>
+          </g>
+          <g>
+            <circle cx="1012.6666666666666" cy="434" r="2.5" fill="#936a26"/>
+            <text x="1026.6666666666665" y="438" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#3d3324">schema-validated</text>
+          </g>
+        <line x1="1000.6666666666666" y1="520" x2="1222.6666666666665" y2="520" stroke="rgba(29,24,16,0.18)" stroke-width="1"/>
+        <text x="1111.6666666666665" y="548" text-anchor="middle" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="11" fill="#6e6149">parseForks()</text>
+      </g>
+    
+      <g>
+        <rect x="1288.3333333333335" y="220" width="270" height="360" rx="14" ry="14" fill="#fbf6e7" stroke="rgba(29,24,16,0.18)" stroke-width="1"/>
+        <text x="1423.3333333333335" y="258" text-anchor="middle" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="9" font-weight="600" letter-spacing="2.2" fill="#936a26">05 · render</text>
+        <text x="1423.3333333333335" y="298" text-anchor="middle" font-family="'Fraunces','EB Garamond',Georgia,serif" font-size="22" font-weight="500" fill="#1d1810">two ways to read</text>
+        <line x1="1393.3333333333335" y1="318" x2="1453.3333333333335" y2="318" stroke="#936a26" stroke-width="1" opacity="0.7"/>
+        
+          <g>
+            <circle cx="1324.3333333333335" cy="362" r="2.5" fill="#936a26"/>
+            <text x="1338.3333333333335" y="366" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#3d3324">timeline · branching SVG</text>
+          </g>
+          <g>
+            <circle cx="1324.3333333333335" cy="398" r="2.5" fill="#936a26"/>
+            <text x="1338.3333333333335" y="402" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#3d3324">cards · stacked long-read</text>
+          </g>
+          <g>
+            <circle cx="1324.3333333333335" cy="434" r="2.5" fill="#936a26"/>
+            <text x="1338.3333333333335" y="438" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#3d3324">one click between</text>
+          </g>
+        <line x1="1312.3333333333335" y1="520" x2="1534.3333333333335" y2="520" stroke="rgba(29,24,16,0.18)" stroke-width="1"/>
+        <text x="1423.3333333333335" y="548" text-anchor="middle" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="11" fill="#6e6149">Timeline / ForkCard</text>
+      </g>
+    <path d="M323.6666666666667,400 L331.33333333333337,400" stroke="#6e6149" stroke-width="1.4" fill="none" marker-end="url(#arrow-light)" opacity="0.65"/><path d="M635.3333333333333,400 L643,400" stroke="#6e6149" stroke-width="1.4" fill="none" marker-end="url(#arrow-light)" opacity="0.65"/><path d="M947,400 L954.6666666666666,400" stroke="#6e6149" stroke-width="1.4" fill="none" marker-end="url(#arrow-light)" opacity="0.65"/><path d="M1258.6666666666667,400 L1266.3333333333335,400" stroke="#6e6149" stroke-width="1.4" fill="none" marker-end="url(#arrow-light)" opacity="0.65"/>
+    <g>
+      <line x1="580" y1="624" x2="1020" y2="624" stroke="rgba(29,24,16,0.18)" stroke-width="1"/>
+      <text x="800" y="660" text-anchor="middle" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#6e6149">one seed yields a fan of lives · trajectory spans ages 19 → 80 · ≈ 4–8 sec end-to-end on a fast model</text>
+    </g>
+  
+</svg>

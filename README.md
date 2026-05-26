@@ -26,10 +26,11 @@ It spawns six versions of you that took the other one.
 
 <p>
   <a href="https://yunyueli.github.io/Mighta/"><b>🚀 Try it now →</b></a> ·
-  <a href="#-quick-start">Quick Start</a> ·
   <a href="#-features">Features</a> ·
+  <a href="#-how-it-works">How it works</a> ·
+  <a href="#%EF%B8%8F-architecture">Architecture</a> ·
+  <a href="#-quick-start">Quick Start</a> ·
   <a href="#-screenshots">Screenshots</a> ·
-  <a href="#%EF%B8%8F-roadmap">Roadmap</a> ·
   <a href="./README-zh.md"><b>简体中文</b></a>
 </p>
 
@@ -138,6 +139,28 @@ Key stays in your browser. No server. No telemetry. No accounts. Zero data colle
 
 <br>
 
+## 🌀 How it works
+
+One seed, five stages, a fan of lives. A single click splits into a few thousand prompt tokens and comes back as six structured `ForkVersion` objects, each ageable from 19 to 80.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/diagram-spawn-flow-dark.svg">
+  <img alt="spawn pipeline — from one fork to a fan of lives" src="./docs/diagram-spawn-flow-light.svg" width="100%">
+</picture>
+
+<br>
+
+## 🧬 Anatomy of a fork
+
+Each life is **five fields, one vibe** — a strict schema that keeps the LLM honest and the rendering consistent across timeline and cards.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/diagram-fork-anatomy-dark.svg">
+  <img alt="fork anatomy — what a single life looks like" src="./docs/diagram-fork-anatomy-light.svg" width="100%">
+</picture>
+
+<br>
+
 ## 🚀 Quick Start
 
 ```bash
@@ -220,30 +243,23 @@ Then open [`http://localhost:5173`](http://localhost:5173):
 
 ## 🏗 Architecture
 
-```
-src/
-├── pages/
-│   ├── Landing.tsx       editorial hero + two doors + drifting crowd
-│   ├── Spawn.tsx         what if: seed → spawn → timeline / cards
-│   ├── Restore.tsx       remnant (placeholder, coming soon)
-│   └── Settings.tsx      provider · model · key · language · theme
-├── components/
-│   ├── Timeline.tsx      SVG branching tree, hover detail panel
-│   ├── ForkCard.tsx      one fork as a card
-│   ├── Importer.tsx      3-stage modal: input → parsing → preview
-│   ├── Crowd.tsx         12 hand-drawn figures, slow drift
-│   ├── LanguageSwitch.tsx, ThemeSwitch.tsx (caret-anchored dropdowns)
-│   └── Icons.tsx         inline SVG, currentColor (no icon lib)
-├── lib/
-│   ├── llm/              provider registry + unified callLLM
-│   ├── spawnPrompt.ts    localized counterfactual system prompt
-│   ├── extractPrompt.ts  bio text → structured forks
-│   ├── presets.ts        4 famous lives + 5 scenarios
-│   ├── i18n.ts           8 locales, browser auto-detect
-│   └── store.ts          Zustand
-└── locales/
-    └── {en, zh, zh-TW, ja, ko, es, fr, de}.json
-```
+A static SPA with **no server in the middle**. Your key, your model, your text — the request goes from your browser straight to the provider you picked.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/diagram-architecture-dark.svg">
+  <img alt="architecture — browser-only, bring your own key" src="./docs/diagram-architecture-light.svg" width="100%">
+</picture>
+
+<br>
+
+## 📁 Codebase
+
+Four lobes (`pages` · `components` · `lib` · `locales`) sharing one Zustand store and Tailwind 4 surface.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/diagram-codebase-dark.svg">
+  <img alt="codebase — how the code is laid out" src="./docs/diagram-codebase-light.svg" width="100%">
+</picture>
 
 <br>
 

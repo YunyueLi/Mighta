@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1080" font-family="'Inter','SF Pro Text',system-ui,sans-serif" role="img" aria-label="codebase layout">
+  <defs>
+    <marker id="arrow-light" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto-start-reverse">
+      <path d="M0,2 L10,6 L0,10 z" fill="#6e6149"/>
+    </marker>
+    <marker id="arrow-accent-light" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto-start-reverse">
+      <path d="M0,2 L10,6 L0,10 z" fill="#936a26"/>
+    </marker>
+    <pattern id="paper-light" x="0" y="0" width="220" height="220" patternUnits="userSpaceOnUse">
+      <rect width="220" height="220" fill="#f5efdf"/>
+      <circle cx="40" cy="60" r="0.6" fill="#aea283" opacity="0.18"/>
+      <circle cx="160" cy="30" r="0.5" fill="#aea283" opacity="0.14"/>
+      <circle cx="100" cy="170" r="0.7" fill="#aea283" opacity="0.20"/>
+      <circle cx="190" cy="120" r="0.4" fill="#aea283" opacity="0.10"/>
+      <circle cx="20" cy="190" r="0.5" fill="#aea283" opacity="0.12"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="1080" fill="url(#paper-light)"/>
+  
+    <g>
+      <text x="800" y="58" text-anchor="middle" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="11" font-weight="600" letter-spacing="3.2" fill="#936a26">codebase · src/</text>
+      <text x="800" y="102" text-anchor="middle" font-family="'Fraunces','EB Garamond',Georgia,serif" font-size="28" font-weight="500" fill="#1d1810">how the code is laid out</text>
+      <text x="800" y="132" text-anchor="middle" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#6e6149">four lobes · one shared store · eight locales</text>
+      <line x1="740" y1="150" x2="860" y2="150" stroke="#936a26" stroke-width="1" opacity="0.6"/>
+    </g>
+  
+      <g>
+        <rect x="48" y="220" width="340" height="380" rx="14" ry="14" fill="#fbf6e7" stroke="rgba(29,24,16,0.18)" stroke-width="1"/>
+        <text x="76" y="260" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="10" font-weight="600" letter-spacing="2.2" fill="#936a26">pages</text>
+        <text x="360" y="260" text-anchor="end" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="10" fill="#6e6149">one file per route</text>
+        <line x1="76" y1="278" x2="360" y2="278" stroke="#936a26" stroke-width="1" opacity="0.6"/>
+        
+          <g>
+            <circle cx="84" cy="312" r="3" fill="#6e6149"/>
+            <text x="98" y="308" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="13" fill="#1d1810">Landing.tsx</text>
+            <text x="98" y="328" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="12" fill="#3d3324">hero · two doors · drifting crowd</text>
+          </g>
+          <g>
+            <circle cx="84" cy="382" r="3" fill="#6e6149"/>
+            <text x="98" y="378" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="13" fill="#1d1810">Spawn.tsx</text>
+            <text x="98" y="398" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="12" fill="#3d3324">seed → spawn → timeline/cards</text>
+          </g>
+          <g>
+            <circle cx="84" cy="452" r="3" fill="#6e6149"/>
+            <text x="98" y="448" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="13" fill="#1d1810">Restore.tsx</text>
+            <text x="98" y="468" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="12" fill="#3d3324">placeholder · coming soon</text>
+          </g>
+          <g>
+            <circle cx="84" cy="522" r="3" fill="#6e6149"/>
+            <text x="98" y="518" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="13" fill="#1d1810">Settings.tsx</text>
+            <text x="98" y="538" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="12" fill="#3d3324">provider · model · key · lang</text>
+          </g>
+      </g>
+    
+      <g>
+        <rect x="436" y="220" width="340" height="520" rx="14" ry="14" fill="#fbf6e7" stroke="rgba(29,24,16,0.18)" stroke-width="1"/>
+        <text x="464" y="260" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="10" font-weight="600" letter-spacing="2.2" fill="#936a26">components</text>
+        <text x="748" y="260" text-anchor="end" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="10" fill="#6e6149">visual primitives</text>
+        <line x1="464" y1="278" x2="748" y2="278" stroke="#936a26" stroke-width="1" opacity="0.6"/>
+        
+          <g>
+            <circle cx="472" cy="312" r="3" fill="#6e6149"/>
+            <text x="486" y="308" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="13" fill="#1d1810">Timeline.tsx</text>
+            <text x="486" y="328" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="12" fill="#3d3324">branching SVG · 6 lanes</text>
+          </g>
+          <g>
+            <circle cx="472" cy="382" r="3" fill="#6e6149"/>
+            <text x="486" y="378" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="13" fill="#1d1810">ForkCard.tsx</text>
+            <text x="486" y="398" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="12" fill="#3d3324">single life as a chapter</text>
+          </g>
+          <g>
+            <circle cx="472" cy="452" r="3" fill="#6e6149"/>
+            <text x="486" y="448" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="13" fill="#1d1810">Importer.tsx</text>
+            <text x="486" y="468" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="12" fill="#3d3324">drop bio · 3-stage modal</text>
+          </g>
+          <g>
+            <circle cx="472" cy="522" r="3" fill="#6e6149"/>
+            <text x="486" y="518" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="13" fill="#1d1810">Akinator.tsx</text>
+            <text x="486" y="538" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="12" fill="#3d3324">narrow down a fork via Qs</text>
+          </g>
+          <g>
+            <circle cx="472" cy="592" r="3" fill="#6e6149"/>
+            <text x="486" y="588" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="13" fill="#1d1810">Crowd.tsx</text>
+            <text x="486" y="608" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="12" fill="#3d3324">12 hand-drawn figures, drift</text>
+          </g>
+          <g>
+            <circle cx="472" cy="662" r="3" fill="#6e6149"/>
+            <text x="486" y="658" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="13" fill="#1d1810">Nav · Theme · Lang</text>
+            <text x="486" y="678" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="12" fill="#3d3324">caret-anchored dropdowns</text>
+          </g>
+      </g>
+    
+      <g>
+        <rect x="824" y="220" width="340" height="520" rx="14" ry="14" fill="#fbf6e7" stroke="rgba(29,24,16,0.18)" stroke-width="1"/>
+        <text x="852" y="260" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="10" font-weight="600" letter-spacing="2.2" fill="#936a26">lib</text>
+        <text x="1136" y="260" text-anchor="end" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="10" fill="#6e6149">logic and glue</text>
+        <line x1="852" y1="278" x2="1136" y2="278" stroke="#936a26" stroke-width="1" opacity="0.6"/>
+        
+          <g>
+            <circle cx="860" cy="312" r="3" fill="#6e6149"/>
+            <text x="874" y="308" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="13" fill="#1d1810">llm/</text>
+            <text x="874" y="328" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="12" fill="#3d3324">provider registry · callLLM</text>
+          </g>
+          <g>
+            <circle cx="860" cy="382" r="3" fill="#6e6149"/>
+            <text x="874" y="378" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="13" fill="#1d1810">spawnPrompt.ts</text>
+            <text x="874" y="398" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="12" fill="#3d3324">localized counterfactual system</text>
+          </g>
+          <g>
+            <circle cx="860" cy="452" r="3" fill="#6e6149"/>
+            <text x="874" y="448" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="13" fill="#1d1810">extractPrompt.ts</text>
+            <text x="874" y="468" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="12" fill="#3d3324">bio text → structured forks</text>
+          </g>
+          <g>
+            <circle cx="860" cy="522" r="3" fill="#6e6149"/>
+            <text x="874" y="518" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="13" fill="#1d1810">presets.ts</text>
+            <text x="874" y="538" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="12" fill="#3d3324">4 famous lives · 5 scenarios</text>
+          </g>
+          <g>
+            <circle cx="860" cy="592" r="3" fill="#6e6149"/>
+            <text x="874" y="588" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="13" fill="#1d1810">i18n.ts</text>
+            <text x="874" y="608" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="12" fill="#3d3324">8 locales · browser auto-detect</text>
+          </g>
+          <g>
+            <circle cx="860" cy="662" r="3" fill="#6e6149"/>
+            <text x="874" y="658" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="13" fill="#1d1810">store.ts</text>
+            <text x="874" y="678" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="12" fill="#3d3324">Zustand · spawn · settings</text>
+          </g>
+      </g>
+    
+      <g>
+        <rect x="1212" y="220" width="340" height="520" rx="14" ry="14" fill="#fbf6e7" stroke="rgba(29,24,16,0.18)" stroke-width="1"/>
+        <text x="1240" y="260" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="10" font-weight="600" letter-spacing="2.2" fill="#936a26">locales</text>
+        <text x="1524" y="260" text-anchor="end" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="10" fill="#6e6149">eight languages</text>
+        <line x1="1240" y1="278" x2="1524" y2="278" stroke="#936a26" stroke-width="1" opacity="0.6"/>
+        
+          <g>
+            <circle cx="1248" cy="312" r="3" fill="#6e6149"/>
+            <text x="1262" y="308" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="13" fill="#1d1810">en.json</text>
+            <text x="1262" y="328" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="12" fill="#3d3324">English</text>
+          </g>
+          <g>
+            <circle cx="1248" cy="382" r="3" fill="#6e6149"/>
+            <text x="1262" y="378" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="13" fill="#1d1810">zh.json</text>
+            <text x="1262" y="398" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="12" fill="#3d3324">简体中文</text>
+          </g>
+          <g>
+            <circle cx="1248" cy="452" r="3" fill="#6e6149"/>
+            <text x="1262" y="448" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="13" fill="#1d1810">zh-TW.json</text>
+            <text x="1262" y="468" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="12" fill="#3d3324">繁體中文</text>
+          </g>
+          <g>
+            <circle cx="1248" cy="522" r="3" fill="#6e6149"/>
+            <text x="1262" y="518" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="13" fill="#1d1810">ja.json</text>
+            <text x="1262" y="538" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="12" fill="#3d3324">日本語</text>
+          </g>
+          <g>
+            <circle cx="1248" cy="592" r="3" fill="#6e6149"/>
+            <text x="1262" y="588" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="13" fill="#1d1810">ko.json</text>
+            <text x="1262" y="608" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="12" fill="#3d3324">한국어</text>
+          </g>
+          <g>
+            <circle cx="1248" cy="662" r="3" fill="#6e6149"/>
+            <text x="1262" y="658" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="13" fill="#1d1810">es · fr · de</text>
+            <text x="1262" y="678" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="12" fill="#3d3324">Español · Français · Deutsch</text>
+          </g>
+      </g>
+    
+    <g>
+      
+    <text x="110" y="880" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="10" font-weight="600" letter-spacing="2.2" fill="#936a26">what's shared across all four</text>
+    <line x1="327" y1="876" x2="1490" y2="876" stroke="rgba(29,24,16,0.18)" stroke-width="1"/>
+  
+      <rect x="110" y="898" width="1380" height="140" rx="14" ry="14" fill="#ede5cd" stroke="rgba(29,24,16,0.18)" stroke-width="1"/>
+
+      <text x="160" y="940" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="9" font-weight="600" letter-spacing="2" fill="#6e6149">state</text>
+      <text x="160" y="962" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#1d1810">Zustand store</text>
+      <text x="160" y="982" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="10" fill="#6e6149">seed · versions · isGenerating</text>
+      <text x="160" y="1002" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="10" fill="#6e6149">credentials · activeProvider</text>
+
+      <text x="460" y="940" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="9" font-weight="600" letter-spacing="2" fill="#6e6149">styling</text>
+      <text x="460" y="962" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#1d1810">Tailwind 4</text>
+      <text x="460" y="982" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="10" fill="#6e6149">CSS variables · no config.js</text>
+      <text x="460" y="1002" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="10" fill="#6e6149">dark · light · auto</text>
+
+      <text x="760" y="940" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="9" font-weight="600" letter-spacing="2" fill="#6e6149">motion</text>
+      <text x="760" y="962" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#1d1810">framer-motion</text>
+      <text x="760" y="982" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="10" fill="#6e6149">entrance · hover · view-toggle</text>
+      <text x="760" y="1002" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="10" fill="#6e6149">whileInView for cards</text>
+
+      <text x="1060" y="940" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="9" font-weight="600" letter-spacing="2" fill="#6e6149">type</text>
+      <text x="1060" y="962" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#1d1810">strict TS</text>
+      <text x="1060" y="982" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="10" fill="#6e6149">zero `any` in product code</text>
+      <text x="1060" y="1002" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="10" fill="#6e6149">shared types in lib/store.ts</text>
+
+      <text x="1340" y="940" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="9" font-weight="600" letter-spacing="2" fill="#6e6149">build</text>
+      <text x="1340" y="962" font-family="'Inter','SF Pro Text',system-ui,sans-serif" font-size="13" fill="#1d1810">Vite 8</text>
+      <text x="1340" y="982" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="10" fill="#6e6149">rolldown · code-split</text>
+      <text x="1340" y="1002" font-family="'JetBrains Mono','SF Mono',ui-monospace,monospace" font-size="10" fill="#6e6149">ghp via 404.html copy</text>
+    </g>
+  
+</svg>

@@ -35,6 +35,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "screenshot": "node scripts/screenshot.mjs",
+    "diagrams": "node scripts/gen-diagrams.mjs",
     "deploy": "npm run build && wrangler pages deploy dist --project-name=mighta --commit-dirty=true --branch=main"
   },
   "dependencies": {
