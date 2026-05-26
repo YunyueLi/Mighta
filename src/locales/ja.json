@@ -72,6 +72,9 @@
     "card_trajectory_open": "+ そこまでの道 ({{count}}の場面)",
     "card_trajectory_close": "− 閉じる",
     "card_age": "{{age}}歳",
+    "cards_chapter": "章",
+    "cards_section_road": "そこまでの道",
+    "cards_index": "六通りの人生",
     "generating": [
       "もう一人のあなたを呼び集めている...",
       "彼らを老いさせている...",

@@ -72,6 +72,9 @@
     "card_trajectory_open": "+ le chemin jusque-là ({{count}} moments)",
     "card_trajectory_close": "− replier",
     "card_age": "{{age}} ans",
+    "cards_chapter": "chapitre",
+    "cards_section_road": "le chemin jusque-là",
+    "cards_index": "les six vies",
     "generating": [
       "convoque les autres toi…",
       "les laisse vieillir…",

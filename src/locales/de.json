@@ -72,6 +72,9 @@
     "card_trajectory_open": "+ der Weg dorthin ({{count}} Momente)",
     "card_trajectory_close": "− einklappen",
     "card_age": "{{age}} Jahre",
+    "cards_chapter": "Kapitel",
+    "cards_section_road": "der Weg dorthin",
+    "cards_index": "die sechs Leben",
     "generating": [
       "die anderen Yous werden gerufen…",
       "wir lassen sie alt werden…",

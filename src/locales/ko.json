@@ -72,6 +72,9 @@
     "card_trajectory_open": "+ 거기까지의 길 ({{count}}개 순간)",
     "card_trajectory_close": "− 접기",
     "card_age": "{{age}}세",
+    "cards_chapter": "장",
+    "cards_section_road": "거기까지의 길",
+    "cards_index": "여섯 갈래 삶",
     "generating": [
       "다른 당신들을 불러 모으는 중...",
       "그들을 늙어가게 두는 중...",

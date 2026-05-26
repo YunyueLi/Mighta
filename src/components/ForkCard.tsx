@@ -1,17 +1,27 @@
-import { useState } from "react"
+/**
+ * ForkCard — a single chapter in the cards/long-read view.
+ *
+ * Unlike Timeline lanes (which are wide-grid quick-scan columns), each card
+ * is a self-contained chapter laid out like a magazine short story: section
+ * headers in small-caps, a display-weight alternative, an always-expanded
+ * trajectory rail with bullet markers, and a vibe-colored capstone for the
+ * outcome. Trajectories are no longer hidden behind an expander — long-read
+ * means the reader doesn't have to ask for the rest.
+ */
+
 import { useTranslation } from "react-i18next"
-import { motion, AnimatePresence } from "framer-motion"
-import { ChevronRight, GitFork } from "./Icons"
+import { motion } from "framer-motion"
+import { GitFork } from "./Icons"
 import type { RawFork } from "../lib/spawnPrompt"
 
 const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"]
 
-const vibeAccent: Record<RawFork["vibe"], string> = {
-  shine: "text-accent",
-  ash: "text-fg-dim",
-  drift: "text-fg-dim",
-  quiet: "text-fg-soft",
-  burn: "text-accent",
+const vibeColor: Record<RawFork["vibe"], string> = {
+  shine: "var(--color-accent)",
+  ash: "var(--color-fg-dim)",
+  drift: "var(--color-fg-soft)",
+  quiet: "var(--color-fg)",
+  burn: "var(--color-rust)",
 }
 
 export default function ForkCard({
@@ -23,101 +33,181 @@ export default function ForkCard({
   index: number
   onReFork?: () => void
 }) {
-  const [open, setOpen] = useState(false)
   const { t } = useTranslation()
-  const vibeColor = vibeAccent[fork.vibe] ?? "text-fg-dim"
+  const color = vibeColor[fork.vibe] ?? "var(--color-fg)"
+  const numeral = roman[index] ?? `${index + 1}`
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.07, ease: [0.16, 1, 0.3, 1] }}
-      className="card p-8 md:p-10 group"
+      id={`chapter-${index + 1}`}
+      initial={{ opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.7, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+      className="card relative px-7 py-10 md:px-12 md:py-14 scroll-mt-24"
     >
-      <header className="flex items-baseline justify-between mb-9">
-        <span
-          className="script text-fg-dim group-hover:text-accent transition-colors duration-500"
-          style={{ fontSize: "2.2rem", lineHeight: 1 }}
+      {/* ── Chapter header ─────────────────────────────────────────── */}
+      <header className="mb-12">
+        <p
+          className="small-caps text-[10px] mb-4 tracking-[0.28em]"
+          style={{ color }}
         >
-          {roman[index] ?? `${index + 1}`}.
-        </span>
-        <div className="flex items-baseline gap-3 folio">
-          <span className={vibeColor}>{t(`vibe.${fork.vibe}`)}</span>
-          <span className="text-fg-faint">·</span>
-          <span>{t("spawn.card_age", { age: fork.divergence.age })}</span>
+          {t("spawn.cards_chapter", { defaultValue: "chapter" })}
+        </p>
+
+        <div className="flex items-baseline gap-5 flex-wrap mb-5">
+          <span
+            className="script"
+            style={{
+              fontSize: "clamp(3rem, 5.5vw, 4.5rem)",
+              lineHeight: 0.85,
+              color,
+            }}
+          >
+            {numeral}.
+          </span>
+          <div className="flex flex-col">
+            <span
+              className="folio text-[10.5px] tracking-[0.24em]"
+              style={{ color }}
+            >
+              {t(`vibe.${fork.vibe}`)}
+            </span>
+            <span className="folio text-[10px] text-fg-faint mt-1 tracking-[0.18em]">
+              {t("spawn.card_age", { age: fork.divergence.age })}
+            </span>
+          </div>
         </div>
+
+        <hr
+          className="border-0 h-px w-16"
+          style={{ background: color, opacity: 0.7 }}
+        />
       </header>
 
-      <div className="mb-6">
-        <p className="small-caps text-[10.5px] text-fg-dim mb-2">{t("spawn.card_instead_of")}</p>
-        <p className="serif-italic text-fg-soft text-[15px] leading-relaxed text-balance">
+      {/* ── Section 1: the moment ──────────────────────────────────── */}
+      <section className="mb-10">
+        <SectionLabel>{t("spawn.card_instead_of")}</SectionLabel>
+        <p className="serif-italic text-fg-soft text-[16px] md:text-[17px] leading-[1.6] text-balance">
           &ldquo;{fork.divergence.event}&rdquo;
         </p>
-      </div>
+      </section>
 
-      <div className="mb-8">
-        <p className="small-caps text-[10.5px] text-accent mb-2">{t("spawn.card_you")}</p>
+      {/* ── Section 2: you mighta — the alternative, display weight ── */}
+      <section className="mb-12">
+        <SectionLabel style={{ color }}>{t("spawn.card_you")}</SectionLabel>
         <p
-          className="text-fg leading-[1.25] text-balance"
+          className="text-fg leading-[1.18] text-balance"
           style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: "clamp(1.25rem, 1.8vw, 1.6rem)",
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(1.55rem, 2.4vw, 2.2rem)",
             fontWeight: 460,
-            letterSpacing: '-0.015em',
+            letterSpacing: "-0.02em",
           }}
         >
           {fork.divergence.alternative}
         </p>
-      </div>
+      </section>
 
-      <p className="text-fg-soft text-[14.5px] leading-[1.75] mb-7 text-balance">{fork.outcome}</p>
-
-      <hr className="rule mb-4" />
-      <div className="flex items-center justify-between gap-3">
-        <button
-          onClick={() => setOpen(!open)}
-          className="folio inline-flex items-center gap-2 hover:text-fg transition-colors duration-300"
-        >
-          <ChevronRight
-            className={`w-3 h-3 transition-transform duration-500 ${open ? "rotate-90" : ""}`}
+      {/* ── Section 3: the road — trajectory, expanded by default ──── */}
+      <section className="mb-12">
+        <SectionLabel>
+          {t("spawn.cards_section_road", { defaultValue: "the road there" })}
+        </SectionLabel>
+        <ol className="relative pl-7 space-y-7">
+          {/* vertical rail */}
+          <span
+            aria-hidden
+            className="absolute left-[9px] top-2 bottom-2 w-px"
+            style={{
+              background: `linear-gradient(to bottom, ${color} 0%, ${color} 70%, transparent 100%)`,
+              opacity: 0.4,
+            }}
           />
-          {open
-            ? t("spawn.card_trajectory_close")
-            : t("spawn.card_trajectory_open", { count: fork.trajectory.length })}
-        </button>
-        {onReFork && (
+          {fork.trajectory.map((step, i) => (
+            <li key={i} className="relative">
+              <span
+                aria-hidden
+                className="absolute -left-[22px] top-[10px] w-2 h-2 rounded-full"
+                style={{ background: color }}
+              />
+              <span
+                aria-hidden
+                className="absolute -left-[26px] top-[6px] w-3 h-3 rounded-full"
+                style={{ background: color, opacity: 0.14 }}
+              />
+              <div className="flex items-baseline gap-3 mb-1.5 flex-wrap">
+                {step.moment ? (
+                  <span className="script text-fg text-[18px] leading-tight">
+                    {step.moment}
+                  </span>
+                ) : null}
+                <span className="folio text-[10px] tracking-[0.18em]">
+                  {step.moment
+                    ? `~${step.age}`
+                    : t("spawn.card_age", { age: step.age })}
+                </span>
+              </div>
+              <p className="text-fg-soft text-[14.5px] md:text-[15px] leading-[1.8] text-balance">
+                {step.state}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* ── Section 4: where it ended — outcome, vibe-rule top ─────── */}
+      <section
+        className="pt-8 mb-2"
+        style={{
+          borderTop: `1px solid ${color}`,
+          borderTopColor: color,
+        }}
+      >
+        <SectionLabel style={{ color }}>
+          {t("spawn.timeline_legend_now")}
+        </SectionLabel>
+        <p
+          className="text-fg text-[15.5px] md:text-[16px] leading-[1.75] text-balance"
+          style={{ fontWeight: 440 }}
+        >
+          {fork.outcome}
+        </p>
+      </section>
+
+      {/* ── Footer: re-fork CTA ─────────────────────────────────────── */}
+      {onReFork && (
+        <footer className="mt-12 flex justify-end">
           <button
             onClick={onReFork}
-            className="folio inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-line hover:border-accent hover:text-accent hover:bg-accent/[0.04] transition-all duration-300"
+            className="folio inline-flex items-center gap-2 px-4 py-2 rounded-full border transition-all"
+            style={{ borderColor: color, color }}
             title={t("spawn.refork_hint")}
           >
             <GitFork className="w-3 h-3" />
             {t("spawn.refork")}
           </button>
-        )}
-      </div>
-
-      <AnimatePresence>
-        {open && (
-          <motion.ol
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="overflow-hidden"
-          >
-            <div className="mt-6 space-y-5 border-l border-line pl-5">
-              {fork.trajectory.map((step, i) => (
-                <li key={i} className="relative">
-                  <span className="absolute -left-[23px] top-2 w-1.5 h-1.5 rounded-full bg-fg-dim" />
-                  <div className="folio mb-1.5">{t("spawn.card_age", { age: step.age })}</div>
-                  <p className="text-fg-soft text-[14px] leading-[1.7]">{step.state}</p>
-                </li>
-              ))}
-            </div>
-          </motion.ol>
-        )}
-      </AnimatePresence>
+        </footer>
+      )}
     </motion.article>
+  )
+}
+
+/* ── Tiny section label primitive ───────────────────────────────────── */
+
+function SectionLabel({
+  children,
+  style,
+}: {
+  children: React.ReactNode
+  style?: React.CSSProperties
+}) {
+  return (
+    <p
+      className="small-caps text-[10px] text-fg-faint mb-3 tracking-[0.26em]"
+      style={style}
+    >
+      {children}
+    </p>
   )
 }

@@ -72,6 +72,9 @@
     "card_trajectory_open": "+ el camino hasta aquí ({{count}} momentos)",
     "card_trajectory_close": "− plegar",
     "card_age": "{{age}} años",
+    "cards_chapter": "capítulo",
+    "cards_section_road": "el camino hasta aquí",
+    "cards_index": "las seis vidas",
     "generating": [
       "convocando a los otros tús…",
       "dejándolos envejecer…",

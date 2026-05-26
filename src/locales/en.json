@@ -72,6 +72,9 @@
     "card_trajectory_open": "+ the road there ({{count}} steps)",
     "card_trajectory_close": "− fold the road",
     "card_age": "age {{age}}",
+    "cards_chapter": "chapter",
+    "cards_section_road": "the road there",
+    "cards_index": "the six lives",
     "generating": [
       "summoning the other yous…",
       "letting them grow old…",

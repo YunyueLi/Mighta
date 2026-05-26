@@ -72,6 +72,9 @@
     "card_trajectory_open": "+ 一路上 ({{count}} 個時刻)",
     "card_trajectory_close": "− 收起",
     "card_age": "{{age}} 歲",
+    "cards_chapter": "章",
+    "cards_section_road": "一路走來",
+    "cards_index": "六種活法",
     "generating": [
       "在召集那些沒活過的你...",
       "讓他們慢慢老去...",

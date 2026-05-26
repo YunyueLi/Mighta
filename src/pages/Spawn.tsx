@@ -381,25 +381,32 @@ export default function Spawn() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.4 }}
-                    className="grid md:grid-cols-2 gap-4 md:gap-5"
                   >
-                    {versions.map((v, i) => (
-                      <ForkCard
-                        key={v.id}
-                        index={i}
-                        onReFork={() => generate(v)}
-                        fork={{
-                          divergence: {
-                            age: v.divergence.age,
-                            event: v.divergence.event,
-                            alternative: v.alternative,
-                          },
-                          trajectory: v.trajectory,
-                          outcome: v.outcome,
-                          vibe: v.vibe,
-                        }}
-                      />
-                    ))}
+                    {/* Chapter index — small dot row for jump-to */}
+                    <ChapterIndex versions={versions} />
+
+                    {/* Single-column long-read of stacked chapters */}
+                    <div className="space-y-16 md:space-y-20">
+                      {versions.map((v, i) => (
+                        <div key={v.id}>
+                          <ForkCard
+                            index={i}
+                            onReFork={() => generate(v)}
+                            fork={{
+                              divergence: {
+                                age: v.divergence.age,
+                                event: v.divergence.event,
+                                alternative: v.alternative,
+                              },
+                              trajectory: v.trajectory,
+                              outcome: v.outcome,
+                              vibe: v.vibe,
+                            }}
+                          />
+                          {i < versions.length - 1 && <ChapterOrnament />}
+                        </div>
+                      ))}
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -615,5 +622,85 @@ function Generating() {
         </motion.p>
       </AnimatePresence>
     </motion.div>
+  )
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+ * Cards-view scaffolding: chapter index + ornament separator.
+ * Lives here (vs. its own file) because it is purely presentational glue
+ * tied to the Spawn page layout — nothing else in the app uses it.
+ * ────────────────────────────────────────────────────────────────── */
+
+const chapterRoman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
+
+const vibeColorMap: Record<ForkVersion["vibe"], string> = {
+  shine: "var(--color-accent)",
+  ash: "var(--color-fg-dim)",
+  drift: "var(--color-fg-soft)",
+  quiet: "var(--color-fg)",
+  burn: "var(--color-rust)",
+}
+
+function ChapterIndex({ versions }: { versions: ForkVersion[] }) {
+  const { t } = useTranslation()
+  return (
+    <nav
+      className="mb-14 md:mb-20 flex flex-col items-center gap-3"
+      aria-label={t("spawn.cards_index", { defaultValue: "the six lives" })}
+    >
+      <span className="small-caps text-[10px] text-fg-faint tracking-[0.28em]">
+        {t("spawn.cards_index", { defaultValue: "the six lives" })}
+      </span>
+      <ul className="flex items-center gap-1 sm:gap-2 flex-wrap justify-center">
+        {versions.map((v, i) => {
+          const color = vibeColorMap[v.vibe]
+          return (
+            <li key={v.id} className="flex items-center gap-1 sm:gap-2">
+              <a
+                href={`#chapter-${i + 1}`}
+                className="group inline-flex items-baseline gap-2 px-3 py-1.5 rounded-full border border-line hover:border-line-bright transition-colors duration-300"
+                title={t(`vibe.${v.vibe}`)}
+              >
+                <span
+                  className="script text-[15px] leading-none"
+                  style={{ color }}
+                >
+                  {chapterRoman[i] ?? `${i + 1}`}.
+                </span>
+                <span className="folio text-[9.5px] tracking-[0.2em]" style={{ color }}>
+                  {t(`vibe.${v.vibe}`)}
+                </span>
+              </a>
+              {i < versions.length - 1 && (
+                <span className="text-fg-faint text-[10px] hidden sm:inline">·</span>
+              )}
+            </li>
+          )
+        })}
+      </ul>
+    </nav>
+  )
+}
+
+function ChapterOrnament() {
+  return (
+    <div
+      aria-hidden
+      className="my-16 md:my-20 flex items-center justify-center gap-3"
+    >
+      <span
+        className="h-px w-12"
+        style={{ background: "var(--color-line)" }}
+      />
+      <svg width="16" height="16" viewBox="0 0 16 16" className="text-fg-faint">
+        <circle cx="8" cy="8" r="1.2" fill="currentColor" opacity="0.6" />
+        <circle cx="2" cy="8" r="0.8" fill="currentColor" opacity="0.3" />
+        <circle cx="14" cy="8" r="0.8" fill="currentColor" opacity="0.3" />
+      </svg>
+      <span
+        className="h-px w-12"
+        style={{ background: "var(--color-line)" }}
+      />
+    </div>
   )
 }
